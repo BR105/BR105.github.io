@@ -1,19 +1,295 @@
-<!doctype html>
-<html lang="es">
+﻿<!DOCTYPE html>
+<html lang="es" class="no-js">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gecko-Apps</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gecko Apps — Aplicaciones gratuitas para Windows y Android</title>
+<meta name="description" content="Gecko Apps hace aplicaciones gratuitas y sin cuentas obligatorias: Zynora y Vocyra para Windows, Opsira y Ordira para Android.">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<meta name="theme-color" content="#0a0a0c">
+<link rel="canonical" href="https://br105.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gecko Apps">
+<meta property="og:title" content="Gecko Apps — Aplicaciones gratuitas para Windows y Android">
+<meta property="og:description" content="Zynora y Vocyra para Windows, Opsira y Ordira para Android. Gratis, sin cuentas obligatorias.">
+<meta property="og:url" content="https://br105.github.io/">
 <style>
-  :root { color-scheme: light dark; }
-  body { font: 16px/1.6 system-ui, sans-serif; max-width: 640px; margin: 0 auto; padding: 32px 16px; }
+:root{
+  /* Mismo sistema que Zynora y Vocyra; el acento del estudio es verde, para no
+     robarle el suyo a ningún producto. */
+  --bg:#0a0a0c; --bg-2:#0e0e12; --surface:#141419; --surface-2:#1a1a21;
+  --hairline:rgba(255,255,255,.08); --hairline-2:rgba(255,255,255,.05);
+  --text:#ececf1; --text-dim:#9c9ca8; --text-muted:#8b8b9c;
+  --accent:#35d07f; --accent-soft:rgba(53,208,127,.14); --accent-line:rgba(53,208,127,.35);
+  --cyan:#4dd4ff;
+  --zynora:#966cff; --vocyra:#ff8a3d; --opsira:#ff2a2a; --ordira:#ff2a2a;
+  --glass:rgba(255,255,255,.07); --glass-brd:rgba(255,255,255,.20);
+  --glass-hi:inset 0 1px 0 rgba(255,255,255,.18);
+  --glass-sh:0 16px 44px -22px rgba(0,0,0,.55); --glass-blur:blur(18px) saturate(1.3);
+  --r-card:14px; --r-ctrl:9px;
+  --maxw:1140px;
+  --font:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scrollbar-color:var(--surface-2) var(--bg-2);scrollbar-width:thin}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:rgba(53,208,127,.38);color:#fff}
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(53,208,127,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(53,208,127,.04) 1px,transparent 1px);
+  background-size:46px 46px;
+  -webkit-mask-image:radial-gradient(115% 70% at 50% -8%,#000,transparent 72%);
+  mask-image:radial-gradient(115% 70% at 50% -8%,#000,transparent 72%);
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+p{margin:0}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.eyebrow{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+section{position:relative;z-index:1}
+.section{padding:84px 0}
+.section-head{max-width:660px;margin:0 auto 54px;text-align:center}
+.section-head h2{font-size:clamp(28px,4vw,42px);margin-bottom:14px}
+.section-head p{color:var(--text-dim);font-size:17px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
+
+/* ---- Header ---- */
+header{position:sticky;top:0;z-index:50;background:rgba(10,10,12,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--hairline-2)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:66px}
+.lockup{display:inline-flex;align-items:center;gap:.45em;line-height:1;font-size:21px}
+.lockup .word{font-weight:800;letter-spacing:-.04em}
+.lockup .word b{color:var(--accent);font-weight:800}
+.nav-links{display:flex;gap:28px;align-items:center;font-size:14.5px;color:var(--text-dim)}
+.nav-links a{transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+@media (max-width:760px){ .nav-links{display:none} }
+
+/* ---- Hero ---- */
+.hero{position:relative;padding:96px 0 68px;text-align:center;overflow:hidden}
+.hero-glow{
+  position:absolute;top:-170px;left:50%;transform:translateX(-50%);
+  width:900px;height:600px;max-width:100%;pointer-events:none;z-index:0;
+  background:radial-gradient(closest-side,rgba(53,208,127,.22),rgba(53,208,127,.04) 55%,transparent 72%);
+  filter:blur(20px);animation:breathe 9s ease-in-out infinite;
+}
+@keyframes breathe{0%,100%{opacity:.75;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.08)}}
+.hero .wrap{position:relative;z-index:1}
+.hero-mark{
+  font-size:clamp(46px,8.5vw,80px);font-weight:800;letter-spacing:-.05em;line-height:1;margin-bottom:28px;
+  filter:drop-shadow(0 2px 10px rgba(53,208,127,.40));
+}
+.hero-mark b{color:var(--accent);font-weight:800}
+/* Emblema: el gecko viene del logo original (PNG recortado); el anillo y el texto
+   están redibujados en SVG, así el día de mañana se edita el texto sin rehacer nada. */
+.marca{background:var(--accent);
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  -webkit-mask-position:center;mask-position:center;
+  -webkit-mask-size:contain;mask-size:contain}
+.emblema{width:clamp(156px,21vw,208px);aspect-ratio:1;margin:0 auto 26px;display:block;
+  -webkit-mask-image:url(assets/emblema.png);mask-image:url(assets/emblema.png);
+  filter:drop-shadow(0 8px 28px rgba(53,208,127,.30))}
+.lockup .gk{width:26px;height:26px;flex:none;
+  -webkit-mask-image:url(assets/gecko.png);mask-image:url(assets/gecko.png)}
+.hero h1{font-size:clamp(28px,4.6vw,46px);letter-spacing:-.03em;max-width:20ch;margin:0 auto 20px}
+.hero-sub{font-size:clamp(16px,2.2vw,20px);color:var(--text-dim);max-width:56ch;margin:0 auto 32px}
+.badges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.badge{
+  display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:var(--text-dim);
+  background:var(--glass);-webkit-backdrop-filter:blur(10px) saturate(1.2);backdrop-filter:blur(10px) saturate(1.2);
+  border:1px solid var(--glass-brd);box-shadow:var(--glass-hi);padding:7px 14px;border-radius:100px;
+}
+.badge .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent)}
+
+/* ---- Tarjetas de app ---- */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.card{
+  position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:flex-start;
+  background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.035));
+  -webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-brd);border-radius:var(--r-card);padding:30px;
+  box-shadow:var(--glass-hi),var(--glass-sh);
+  transition:transform .32s var(--ease),border-color .25s ease,box-shadow .3s ease;
+}
+.card::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;
+  background:radial-gradient(120% 80% at 50% -10%,var(--c,rgba(53,208,127,.18)),transparent 60%);
+  transition:opacity .3s ease;
+}
+.card:hover{transform:translateY(-4px);border-color:var(--cl,var(--accent-line));box-shadow:var(--glass-hi),var(--glass-sh),0 22px 50px -24px var(--cl,var(--accent-line))}
+.card:hover::after{opacity:1}
+.card>*{position:relative;z-index:1}
+.card .ico{width:56px;height:56px;object-fit:contain;margin-bottom:20px;filter:drop-shadow(0 6px 18px rgba(0,0,0,.6))}
+.card h3{font-size:21px;margin-bottom:6px}
+.card .plat{font-size:12.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--pt,var(--accent));margin-bottom:12px}
+.card p{color:var(--text-dim);font-size:15px;flex:1}
+.cta{display:inline-flex;align-items:center;gap:8px;margin-top:22px;font-size:14.5px;font-weight:600;color:var(--pt,var(--accent))}
+.cta svg{width:16px;height:16px;transition:transform .2s var(--ease)}
+.card:hover .cta svg{transform:translateX(4px)}
+.cta.pronto{color:var(--text-muted);font-weight:500;background:var(--glass);border:1px solid var(--glass-brd);border-radius:100px;padding:5px 14px;font-size:12.5px}
+@media (max-width:860px){ .grid{grid-template-columns:1fr} }
+
+/* ---- Pie ---- */
+footer{border-top:1px solid var(--hairline-2);background:var(--bg-2);padding:52px 0 36px;position:relative;z-index:1}
+.foot{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap}
+.foot-brand{max-width:320px}
+.foot-brand .lockup{font-size:20px;margin-bottom:14px}
+.foot-brand p{color:var(--text-muted);font-size:13.5px;line-height:1.6}
+.foot-credit{
+  display:inline-flex;align-items:center;gap:7px;margin-top:16px;color:var(--text-dim);font-size:13px;font-weight:600;
+  padding:4px 12px 4px 4px;border-radius:100px;border:1px solid transparent;transition:color .2s,background .2s,border-color .2s;
+}
+.foot-credit:hover{color:var(--text);background:var(--glass);border-color:var(--glass-brd)}
+.foot-credit img{width:30px;height:30px;border-radius:50%;flex:none;border:1px solid var(--hairline);object-fit:cover}
+.foot-made{margin-top:12px;color:var(--text-muted);font-size:12px;line-height:1.5}
+.foot-made b{color:var(--text-dim);font-weight:600}
+.foot-cols{display:flex;gap:64px;flex-wrap:wrap}
+.foot-col h4{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted);margin:0 0 14px}
+.foot-col a{display:block;color:var(--text-dim);font-size:14.5px;margin-bottom:10px;transition:color .2s}
+.foot-col a:hover{color:var(--text)}
+.kofi{color:var(--accent) !important;font-weight:600}
+.foot-bottom{margin-top:44px;padding-top:24px;border-top:1px solid var(--hairline-2);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--text-muted);font-size:13px}
+.foot-bottom a{color:var(--text-muted)}
+.foot-bottom a:hover{color:var(--text-dim)}
+
+/* ---- Movimiento ---- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+html.no-js .reveal{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;transition-duration:.01ms !important}
+  .reveal{opacity:1;transform:none}
+}
 </style>
 </head>
 <body>
-<h1>Gecko-Apps</h1>
-<p>Apps gratuitas para Android.</p>
-<h2>Opsira</h2>
-<p>Editor de fotos y videos. <a href="https://br105.github.io/editor-fotos-releases/privacidad.html">Política de privacidad</a></p>
-<p>Contacto: <a href="mailto:geckoappsdev@gmail.com">geckoappsdev@gmail.com</a></p>
+
+<header>
+  <div class="wrap nav">
+    <a class="lockup" href="#top" aria-label="Gecko Apps inicio"><span class="marca gk" aria-hidden="true"></span><span class="word"><b>Gecko</b> Apps</span></a>
+    <nav class="nav-links">
+      <a href="#apps">Aplicaciones</a>
+      <a href="#windows">Windows</a>
+      <a href="#android">Android</a>
+      <a href="mailto:geckoappsdev@gmail.com">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="marca emblema" role="img" aria-label="Gecko Apps"></div>
+    <h1>Aplicaciones que hacen su trabajo y no te piden nada</h1>
+    <p class="hero-sub">Cuatro programas para Windows y Android. Gratis, sin cuentas obligatorias y sin funciones escondidas detrás de una suscripción.</p>
+    <div class="badges">
+      <span class="badge"><span class="dot"></span>Windows 10 y 11</span>
+      <span class="badge">Android</span>
+      <span class="badge">Sin cuentas obligatorias</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="apps" style="padding-top:34px">
+  <div class="section-head reveal" id="windows">
+    <span class="eyebrow">Para Windows</span>
+    <h2>Lo que corre en tu PC</h2>
+    <p>Portables, en un solo archivo. Se descomprimen y se abren: no se instalan ni dejan nada regado en el sistema.</p>
+  </div>
+  <div class="wrap">
+    <div class="grid reveal">
+      <a class="card" href="https://br105.github.io/Zynora-releases/" style="--pt:var(--zynora);--c:rgba(150,108,255,.18);--cl:rgba(150,108,255,.55)">
+        <img class="ico" src="assets/zynora.png" alt="">
+        <h3>Zynora</h3>
+        <div class="plat">Windows · gratis</div>
+        <p>Un solo lugar para tus periféricos: remapea mouse, teclado y control de cualquier marca, graba macros, controla el RGB con Lumyx y ecualiza el audio de tu PC.</p>
+        <span class="cta">Ver la página
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a class="card" href="https://br105.github.io/Vocyra-releases/" style="--pt:var(--vocyra);--c:rgba(255,138,61,.18);--cl:rgba(255,138,61,.55)">
+        <img class="ico" src="assets/vocyra.png" alt="">
+        <h3>Vocyra</h3>
+        <div class="plat">Windows · gratis</div>
+        <p>Soundboard y cambiador de voz: sonidos ilimitados en Discord, juegos y llamadas, con efectos en vivo y atajos que siguen funcionando dentro del juego.</p>
+        <span class="cta">Ver la página
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="android" style="padding-top:20px">
+  <div class="section-head reveal">
+    <span class="eyebrow">Para Android</span>
+    <h2>Lo que llevas en el teléfono</h2>
+    <p>Dos apps hermanas para tus fotos: una las edita, la otra decide en qué orden se ven.</p>
+  </div>
+  <div class="wrap">
+    <div class="grid reveal">
+      <div class="card" style="--pt:var(--opsira);--c:rgba(255,42,42,.16);--cl:rgba(255,42,42,.5)">
+        <img class="ico" src="assets/opsira.png" alt="">
+        <h3>Opsira</h3>
+        <div class="plat">Android · en pruebas</div>
+        <p>Editor de foto y video: filtros, recorte, quitar el fondo, collage, texto y subtítulos, sin marca de agua encima de tu trabajo.</p>
+        <span class="cta pronto">Próximamente en Google Play</span>
+      </div>
+      <div class="card" style="--pt:var(--ordira);--c:rgba(255,42,42,.16);--cl:rgba(255,42,42,.5)">
+        <img class="ico" src="assets/ordira.png" alt="">
+        <h3>Ordira</h3>
+        <div class="plat">Android · en construcción</div>
+        <p>Acomoda tus fotos en cuadrícula y mira cómo va a quedar tu perfil completo antes de publicar la primera.</p>
+        <span class="cta pronto">Próximamente</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="foot-brand">
+        <span class="lockup"><span class="marca gk" aria-hidden="true"></span><span class="word"><b>Gecko</b> Apps</span></span>
+        <p>Aplicaciones gratuitas para Windows y Android. Estudio independiente: no está afiliado ni asociado a ninguna marca.</p>
+        <a class="foot-credit" href="https://www.youtube.com/@Azmo105" target="_blank" rel="noopener">
+          <img src="assets/azmo105.png" alt="AZMO105" width="30" height="30" loading="lazy">
+          Hecho por AZMO105
+        </a>
+        <p class="foot-made"><b>Idea y dirección de AZMO105</b> · desarrollado con Claude (Anthropic).</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h4>Windows</h4>
+          <a href="https://br105.github.io/Zynora-releases/">Zynora</a>
+          <a href="https://br105.github.io/Vocyra-releases/">Vocyra</a>
+        </div>
+        <div class="foot-col">
+          <h4>Android</h4>
+          <a href="https://br105.github.io/opsira-releases/">Opsira</a>
+          <a href="https://br105.github.io/opsira-releases/privacidad.html">Privacidad de Opsira</a>
+          <a href="https://br105.github.io/opsira-releases/terminos.html">Condiciones de Opsira</a>
+        </div>
+        <div class="foot-col">
+          <h4>Apóyanos</h4>
+          <a class="kofi" href="https://ko-fi.com/azmo105" target="_blank" rel="noopener">Apóyanos con un café</a>
+          <a href="mailto:geckoappsdev@gmail.com">geckoappsdev@gmail.com</a>
+          <a href="https://github.com/BR105" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Gecko Apps. Estudio independiente. No afiliado ni asociado a ninguna marca.</span>
+      <span><a href="https://br105.github.io/opsira-releases/privacidad.html">Privacidad</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.remove('no-js');
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{rootMargin:'0px 0px -12% 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+</script>
 </body>
 </html>
