@@ -1,0 +1,6 @@
+# En GitHub Pages el robots.txt solo cuenta en la raíz del dominio, no por proyecto:
+# por eso este archivo vive aquí y declara los sitemaps de todos los sitios.
+User-agent: *
+Allow: /
+
+Sitemap: https://br105.github.io/sitemap.xml
