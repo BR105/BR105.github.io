@@ -19,14 +19,16 @@ documentación del sitio: es el bote de ideas de la identidad.
   se acomoda sobre la curva). Las dos dibujan el nombre en vivo, así que la
   misma intro sirve para Apps y para Games.
 
+- **El reparto es el «Clásico», y ya está puesto.** Líneas finas arriba con
+  GECKO, banda rellena abajo con APPS calado. Mantiene el esqueleto de
+  siempre, así que no se siente un logo nuevo, pero ya no repite el nombre.
+  Vive en `assets/emblema.png`, y la submarca en `assets/emblema-games.png`.
+  Para regenerar cualquiera de los dos:
+  `herramientas\emblema.ps1 -Abajo APPS|GAMES -Salida <ruta>`.
+  A 24 px ningún emblema conserva las letras: de 40 px para abajo hay que
+  usar el gecko solo (`assets/favicon.png`).
+
 ## Por probar
-
-### El reparto «Clásico» para Gecko Apps
-
-De los cinco repartos que generamos, el **clásico** (líneas finas arriba con
-GECKO, banda rellena abajo con APPS calado) es el candidato para Gecko Apps:
-mantiene el esqueleto de siempre, así que no se siente un logo nuevo, pero ya
-no repite el nombre.
 
 ### Animación: las letras salen girando de su fondo contrario
 
@@ -71,7 +73,6 @@ uno recortado para abajo).
 
 ## Pendiente de decidir
 
-- Qué reparto de las letras se adopta (va ganando el **Clásico**).
 - Qué intro le toca a Gecko Apps y cuál a Gecko Games.
 - Si Gecko Games lleva el mismo verde del estudio o color propio.
 - Pasar la intro elegida a video (MP4 1920×1080, o WebM con transparencia) y
