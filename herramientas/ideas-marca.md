@@ -47,17 +47,31 @@ Nota técnica para cuando toque: el cambio de sólido a calado se puede hacer
 con dos copias del texto (una sólida, otra calada) y una máscara que siga al
 aro, en vez de intentar animar el recorte letra por letra.
 
-### El idea de la cola como G
+## Cerrado: la marca simple no funcionó
 
-En los primeros bocetos la cola del gecko hacía de **G**. Funcionaba con el
-dibujo del gecko entero, pero sola no se leía como letra. Vale la pena
-reintentarlo ahora que buscamos una marca más simple: si el cuerpo y la cola
-se simplifican a trazo grueso, la G puede volver a aparecer sin que haya que
-explicarla.
+Se intentó dos veces cambiar el gecko por un símbolo más simple, al estilo
+Razer o Corsair: una tanda dibujada en la sesión y otra con el agente
+`disenador-logos`, diez propuestas en total. **Las dos tandas se rechazaron
+enteras.** Entre ellas iba la idea de la **cola haciendo de G**, que venía de
+los primeros bocetos; con trazo grueso se lee como una G con bolitas, no como
+un gecko, así que esa vía también queda cerrada.
+
+El motivo de fondo: las dos tandas se dibujaron escribiendo coordenadas de
+SVG a mano, y así salen formas geométricas, no un bicho con carácter. El
+gecko original tiene una curva y una cola que salieron de una mano dibujando.
+
+**El símbolo se queda como está.** Si algún día se quiere un gecko nuevo de
+verdad, el camino es un ilustrador o una herramienta de generación de
+imágenes, y después pasarlo a vector limpio. No reintentarlo a mano.
+
+Lo único que sí salió del ejercicio: el gecko completo visto desde arriba
+**no cabe en 24 px**, tiene demasiados eventos. O el ícono chico es otra
+forma, o se hace un sistema de dos pesos (el completo de 128 px para arriba,
+uno recortado para abajo).
 
 ## Pendiente de decidir
 
-- Cuál símbolo simple se queda de marca principal.
+- Qué reparto de las letras se adopta (va ganando el **Clásico**).
 - Qué intro le toca a Gecko Apps y cuál a Gecko Games.
 - Si Gecko Games lleva el mismo verde del estudio o color propio.
 - Pasar la intro elegida a video (MP4 1920×1080, o WebM con transparencia) y
