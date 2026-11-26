@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Gecko Apps — intros de marca</title>
+<style>
+@font-face{font-family:'Mont';src:url('Montserrat-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
+
+:root{
+  --bg:#0a0a0c; --surface:#141419; --hairline:rgba(255,255,255,.08);
+  --text:#ececf1; --text-dim:#9c9ca8;
+  --accent:#35d07f; --accent-line:rgba(53,208,127,.35);
+  --font:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);
+  padding:28px 20px 70px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1000px;margin:0 auto}
+h1{font-size:clamp(22px,3.4vw,32px);letter-spacing:-.03em;margin:0 0 6px}
+h1 b{color:var(--accent)}
+.sub{color:var(--text-dim);font-size:15px;margin:0 0 26px;max-width:62ch;line-height:1.55}
+.barra{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:26px}
+button{font:inherit;font-size:13px;font-weight:600;color:var(--text);cursor:pointer;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);
+  border-radius:9px;padding:8px 14px;transition:.2s var(--ease)}
+button:hover{background:rgba(53,208,127,.16);border-color:var(--accent-line)}
+.pieza{margin-bottom:34px}
+.cab{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.num{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.14em}
+.tit{font-size:18px;font-weight:700;letter-spacing:-.02em}
+.desc{color:var(--text-dim);font-size:13.5px;margin:0 0 12px;line-height:1.5}
+.dur{font-size:11.5px;color:var(--text-dim);border:1px solid var(--hairline);
+  border-radius:999px;padding:2px 9px}
+
+/* ---------- escena ---------- */
+.escena{position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden;
+  border-radius:12px;border:1px solid var(--hairline);isolation:isolate}
+.capa{position:absolute;inset:0;display:grid;place-items:center}
+.emb,.gk{background:var(--accent);
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  -webkit-mask-position:center;mask-position:center;
+  -webkit-mask-size:contain;mask-size:contain}
+.emb{-webkit-mask-image:url(../assets/emblema.png);mask-image:url(../assets/emblema.png)}
+.gk{-webkit-mask-image:url(../assets/gecko.png);mask-image:url(../assets/gecko.png)}
+.palabra{font-family:'Mont',var(--font);font-weight:700;color:#fff;
+  letter-spacing:.34em;text-transform:uppercase;white-space:nowrap}
+
+/* tamaños relativos a la ESCENA (no a la ventana): así se ve igual
+   en la página, a pantalla completa o al grabarla en 1920x1080 */
+.escena{container-type:size}
+.escena *{--u:1cqw}
+
+/* ============ 1 · ENCENDIDO ============ */
+.e1 .halo{position:absolute;width:62%;aspect-ratio:1;border-radius:50%;opacity:0;
+  background:radial-gradient(circle,rgba(53,208,127,.45),transparent 62%);filter:blur(26px)}
+.e1 .em{width:37%;aspect-ratio:1;opacity:0}
+.e1 .barrido{position:absolute;left:0;right:0;height:2px;top:50%;opacity:0;
+  background:linear-gradient(90deg,transparent,rgba(53,208,127,.9),transparent);
+  box-shadow:0 0 22px rgba(53,208,127,.8)}
+.e1.go .barrido{animation:e1scan .5s var(--ease) .05s both}
+.e1.go .em{animation:e1on 2.1s linear .3s both}
+.e1.go .halo{animation:e1halo 2.4s var(--ease) .45s both}
+@keyframes e1scan{0%{opacity:0;transform:scaleX(.1)}25%{opacity:1}100%{opacity:0;transform:scaleX(1.1)}}
+@keyframes e1on{
+  0%{opacity:0;filter:brightness(.3)}
+  6%{opacity:.85;filter:brightness(2.4)}
+  9%{opacity:.05}
+  14%{opacity:.9;filter:brightness(1.6)}
+  17%{opacity:.1}
+  21%{opacity:1;filter:brightness(2.1)}
+  26%{opacity:.35}
+  34%{opacity:1;filter:brightness(1)}
+  100%{opacity:1;filter:brightness(1)}}
+@keyframes e1halo{0%{opacity:0;transform:scale(.6)}40%{opacity:1}100%{opacity:.55;transform:scale(1)}}
+@keyframes e1nom{0%{opacity:0;letter-spacing:1.3em}100%{opacity:.92;letter-spacing:.5em}}
+
+/* ============ 2 · GARRA ============ */
+.e2{background:#07090b}
+.e2 .grano{position:absolute;inset:-30%;opacity:.16;pointer-events:none;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+.e2.go .grano{animation:e2grano .4s steps(4) infinite}
+@keyframes e2grano{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-2%)}100%{transform:translate(3%,1%)}}
+.e2 .tira{position:absolute;inset:0;display:grid;place-items:center;opacity:0;
+  -webkit-mask-image:linear-gradient(104deg,#000 42%,transparent 56%);mask-image:linear-gradient(104deg,#000 42%,transparent 56%);
+  -webkit-mask-size:280% 100%;mask-size:280% 100%;
+  -webkit-mask-position:110% 0;mask-position:110% 0}
+.e2 .t1{clip-path:polygon(0 0,100% 0,100% 26%,0 41%)}
+.e2 .t2{clip-path:polygon(0 41%,100% 26%,100% 57%,0 72%)}
+.e2 .t3{clip-path:polygon(0 72%,100% 57%,100% 100%,0 100%)}
+.e2 .tira .em{width:40%;aspect-ratio:1;background:#d8f5e6}
+.e2 .zarpa{position:absolute;top:-30%;left:-20%;width:150%;height:160%;opacity:0;
+  background:linear-gradient(104deg,transparent 46%,rgba(255,255,255,.95) 50%,transparent 54%);
+  filter:blur(1px)}
+.e2.go .t1{animation:e2rev .42s cubic-bezier(.3,.9,.2,1) .1s both}
+.e2.go .t2{animation:e2rev .42s cubic-bezier(.3,.9,.2,1) .26s both}
+.e2.go .t3{animation:e2rev .42s cubic-bezier(.3,.9,.2,1) .42s both}
+.e2.go .z1{animation:e2z .3s linear .08s both}
+.e2.go .z2{animation:e2z .3s linear .24s both}
+.e2.go .z3{animation:e2z .3s linear .40s both}
+.e2.go{animation:e2shake .62s ease-out .1s both}
+@keyframes e2rev{0%{opacity:1;-webkit-mask-position:110% 0;mask-position:110% 0}
+  100%{opacity:1;-webkit-mask-position:-10% 0;mask-position:-10% 0}}
+@keyframes e2z{0%{opacity:0;transform:translateX(42%)}30%{opacity:1}100%{opacity:0;transform:translateX(-42%)}}
+@keyframes e2shake{0%,100%{transform:translate(0,0)}
+  8%{transform:translate(-.5%,.4%)}18%{transform:translate(.6%,-.3%)}
+  32%{transform:translate(-.4%,-.5%)}46%{transform:translate(.3%,.3%)}60%{transform:translate(-.2%,.1%)}}
+.e2 .vis{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(circle at 50% 50%,transparent 42%,rgba(0,0,0,.72))}
+
+/* ============ 3 · CINÉTICO ============ */
+.e3 .fila{position:absolute;display:flex;align-items:center;gap:calc(var(--u)*.9)}
+.e3 .gk{width:calc(var(--u)*7.2);aspect-ratio:1;opacity:0;flex:none}
+.e3 .p1,.e3 .p2{font-size:calc(var(--u)*4.2);letter-spacing:-.02em;opacity:0}
+.e3 .p1{color:#fff}
+.e3 .p2{color:var(--accent)}
+.e3 .onda{position:absolute;width:12%;aspect-ratio:1;border-radius:50%;opacity:0;
+  border:2px solid rgba(53,208,127,.85)}
+.e3 .raya{position:absolute;left:0;right:0;height:calc(var(--u)*1.1);background:var(--accent);
+  transform:scaleX(0);transform-origin:left}
+.e3 .r1{top:30%}.e3 .r2{bottom:30%;transform-origin:right}
+.e3.go .r1{animation:e3raya .55s var(--ease) 0s both}
+.e3.go .r2{animation:e3raya .55s var(--ease) .06s both}
+.e3.go .p1{animation:e3izq .6s cubic-bezier(.2,1.2,.3,1) .42s both}
+.e3.go .p2{animation:e3der .6s cubic-bezier(.2,1.2,.3,1) .42s both}
+.e3.go .gk{animation:e3gk .5s cubic-bezier(.2,1.6,.4,1) .78s both}
+.e3.go .onda{animation:e3onda .9s var(--ease) .86s both}
+@keyframes e3raya{0%{transform:scaleX(0)}55%{transform:scaleX(1)}100%{transform:scaleX(0);transform-origin:right}}
+@keyframes e3izq{0%{opacity:0;transform:translateX(-38%)}100%{opacity:1;transform:translateX(0)}}
+@keyframes e3der{0%{opacity:0;transform:translateX(38%)}100%{opacity:1;transform:translateX(0)}}
+@keyframes e3gk{0%{opacity:0;transform:scale(2.4) rotate(-14deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes e3onda{0%{opacity:.9;transform:scale(.3)}100%{opacity:0;transform:scale(5)}}
+
+/* ============ 4 · ENJAMBRE ============ */
+.e4 canvas{position:absolute;inset:0;width:100%;height:100%}
+.e4 .aro{position:absolute;width:34%;aspect-ratio:1;opacity:0}
+.e4 .aro circle{fill:none;stroke:var(--accent);stroke-width:2.4;
+  stroke-dasharray:302;stroke-dashoffset:302}
+.e4 .nom{position:absolute;bottom:8%;font-size:calc(var(--u)*1.45);opacity:0;letter-spacing:.6em;transform:translateX(.3em)}
+.e4.go .aro{animation:e4aro 1s var(--ease) 1.55s both}
+.e4.go .aro circle{animation:e4traz 1.1s var(--ease) 1.55s both}
+.e4.go .nom{animation:e4nom 1s var(--ease) 2.25s both}
+@keyframes e4aro{0%{opacity:0;transform:scale(1.12)}100%{opacity:1;transform:scale(1)}}
+@keyframes e4traz{to{stroke-dashoffset:0}}
+@keyframes e4nom{0%{opacity:0;letter-spacing:1em}100%{opacity:.9;letter-spacing:.45em}}
+
+/* ============ 5 · VIDRIO ============ */
+.e5{background:radial-gradient(130% 110% at 50% 46%,#13241c 0%,#07090b 58%)}
+.e5 .resp{position:absolute;width:74%;aspect-ratio:1;border-radius:50%;opacity:0;
+  background:radial-gradient(circle,rgba(53,208,127,.3),transparent 60%);filter:blur(34px)}
+.e5 .em{width:31%;aspect-ratio:1;opacity:0;
+  background:linear-gradient(104deg,#35d07f 34%,#a8ffd3 48%,#ffffff 51%,#a8ffd3 54%,#35d07f 66%);
+  background-size:320% 100%;background-position:128% 0}
+.e5 .nom{position:absolute;bottom:9%;font-size:calc(var(--u)*1.5);opacity:0;letter-spacing:.7em;transform:translateX(.35em)}
+.e5 .linea{position:absolute;bottom:19%;height:1px;width:0;background:var(--accent-line)}
+.e5.go .resp{animation:e5resp 3s var(--ease) .1s both}
+.e5.go .em{animation:e5em 1.1s var(--ease) .25s both,e5brillo 1.5s var(--ease) .85s both}
+.e5.go .linea{animation:e5linea 1.1s var(--ease) 1.5s both}
+.e5.go .nom{animation:e5nom 1.3s var(--ease) 1.65s both}
+@keyframes e5resp{0%{opacity:0;transform:scale(.78)}45%{opacity:1}100%{opacity:.75;transform:scale(1.04)}}
+@keyframes e5em{0%{opacity:0;transform:perspective(900px) rotateY(16deg) scale(.9)}
+  100%{opacity:1;transform:perspective(900px) rotateY(0) scale(1)}}
+@keyframes e5brillo{0%{background-position:128% 0}100%{background-position:-28% 0}}
+@keyframes e5linea{0%{width:0;opacity:0}100%{width:26%;opacity:1}}
+@keyframes e5nom{0%{opacity:0;transform:translateY(8px);letter-spacing:1.1em}
+  100%{opacity:.95;transform:translateY(0);letter-spacing:.55em}}
+
+@media(prefers-reduced-motion:reduce){
+  .escena *{animation-duration:.01ms!important;animation-iteration-count:1!important}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Intros de <b>Gecko Apps</b></h1>
+  <p class="sub">Cinco cortinillas de estudio, todas con el emblema que ya tenemos. Dale a
+     cada «Repetir» para verlas una por una. Cuando elijas la que te guste la dejo fina y la
+     paso a video para meterla al principio de tus clips.</p>
+  <div class="barra">
+    <button onclick="todas()">▶ Ver las cinco seguidas</button>
+    <button onclick="document.querySelectorAll('.escena').forEach(correr)">Repetir todas a la vez</button>
+  </div>
+
+  <!-- 1 -->
+  <div class="pieza">
+    <div class="cab"><span class="num">01</span><span class="tit">Encendido</span><span class="dur">3.0 s</span></div>
+    <p class="desc">Negro total, un barrido de luz y el emblema prende como un letrero de neón:
+       parpadea, se estabiliza y suelta el halo. Es la más «marca de estudio» clásica.</p>
+    <div class="escena e1" onclick="correr(this)">
+      <div class="capa"><span class="halo"></span></div>
+      <div class="capa"><span class="emb em"></span></div>
+      <div class="capa"><span class="barrido"></span></div>
+    </div>
+    <div class="barra" style="margin:10px 0 0"><button onclick="correr(this.closest('.pieza').querySelector('.escena'))">Repetir</button></div>
+  </div>
+
+  <!-- 2 -->
+  <div class="pieza">
+    <div class="cab"><span class="num">02</span><span class="tit">Garra</span><span class="dur">2.4 s</span></div>
+    <p class="desc">Tres zarpazos rasgan la pantalla y cada corte descubre una franja del emblema,
+       con grano de película y un temblor seco. Es la de Undead Labs / State of Decay.</p>
+    <div class="escena e2" onclick="correr(this)">
+      <div class="capa tira t1"><span class="emb em"></span></div>
+      <div class="capa tira t2"><span class="emb em"></span></div>
+      <div class="capa tira t3"><span class="emb em"></span></div>
+      <span class="zarpa z1"></span><span class="zarpa z2"></span><span class="zarpa z3"></span>
+      <span class="vis"></span><span class="grano"></span>
+    </div>
+    <div class="barra" style="margin:10px 0 0"><button onclick="correr(this.closest('.pieza').querySelector('.escena'))">Repetir</button></div>
+  </div>
+
+  <!-- 3 -->
+  <div class="pieza">
+    <div class="cab"><span class="num">03</span><span class="tit">Cinético</span><span class="dur">2.2 s</span></div>
+    <p class="desc">Dos barras cruzan, las palabras chocan en el centro y el gecko cae de golpe
+       con una onda de impacto. Corta, rápida y moderna: la que mejor va antes de un clip de app.</p>
+    <div class="escena e3" onclick="correr(this)">
+      <span class="raya r1"></span><span class="raya r2"></span>
+      <div class="capa"><div class="fila">
+        <span class="palabra p1">Gecko</span>
+        <span class="gk"></span>
+        <span class="palabra p2">Apps</span>
+      </div></div>
+      <div class="capa"><span class="onda"></span></div>
+    </div>
+    <div class="barra" style="margin:10px 0 0"><button onclick="correr(this.closest('.pieza').querySelector('.escena'))">Repetir</button></div>
+  </div>
+
+  <!-- 4 -->
+  <div class="pieza">
+    <div class="cab"><span class="num">04</span><span class="tit">Enjambre</span><span class="dur">3.4 s</span></div>
+    <p class="desc">Mil partículas entran volando y se arman en la silueta del gecko; después se
+       traza el anillo alrededor. La más llamativa y la que más dice «esto lo hizo alguien».</p>
+    <div class="escena e4" data-canvas onclick="correr(this)">
+      <canvas></canvas>
+      <div class="capa"><svg class="aro" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48"/></svg></div>
+      <div class="capa"><span class="palabra nom">Gecko Apps</span></div>
+    </div>
+    <div class="barra" style="margin:10px 0 0"><button onclick="correr(this.closest('.pieza').querySelector('.escena'))">Repetir</button></div>
+  </div>
+
+  <!-- 5 -->
+  <div class="pieza">
+    <div class="cab"><span class="num">05</span><span class="tit">Vidrio</span><span class="dur">3.2 s</span></div>
+    <p class="desc">El emblema gira suave hacia el frente y un reflejo de luz lo recorre, sobre un
+       resplandor que respira. Es la más elegante y la que calca el estilo de la página.</p>
+    <div class="escena e5" onclick="correr(this)">
+      <div class="capa"><span class="resp"></span></div>
+      <div class="capa"><span class="emb em"></span></div>
+      <div class="capa"><span class="linea"></span></div>
+      <div class="capa"><span class="palabra nom">Gecko Apps</span></div>
+    </div>
+    <div class="barra" style="margin:10px 0 0"><button onclick="correr(this.closest('.pieza').querySelector('.escena'))">Repetir</button></div>
+  </div>
+</div>
+
+<script>
+function correr(el){
+  el.classList.remove('go');
+  void el.offsetWidth;          // reinicia las animaciones CSS
+  el.classList.add('go');
+  if(el.hasAttribute('data-canvas')) enjambre(el);
+}
+
+/* ---- intro 4: partículas que forman el gecko ---- */
+var puntos = null, imgGk = new Image();
+imgGk.src = '../assets/gecko.png';
+
+function muestrear(){
+  if(puntos) return puntos;
+  var L = 260, c = document.createElement('canvas');
+  c.width = c.height = L;
+  var x = c.getContext('2d', {willReadFrequently:true});
+  x.drawImage(imgGk, 0, 0, L, L);
+  var d = x.getImageData(0, 0, L, L).data, p = [];
+  for(var j = 0; j < L; j += 2){
+    for(var i = 0; i < L; i += 2){
+      if(d[(j*L + i)*4 + 3] > 130) p.push([i/L - .5, j/L - .5]);
+    }
+  }
+  puntos = p;
+  return p;
+}
+
+function enjambre(esc){
+  var cv = esc.querySelector('canvas'), ctx = cv.getContext('2d');
+  if(esc._raf) cancelAnimationFrame(esc._raf);
+  if(!imgGk.complete){ imgGk.onload = function(){ enjambre(esc); }; return; }
+
+  var dpr = Math.min(devicePixelRatio || 1, 2);
+  var W = cv.clientWidth, H = cv.clientHeight;
+  cv.width = W*dpr; cv.height = H*dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  var base = muestrear(), lado = Math.min(W, H) * 0.40;
+  var cx = W/2, cy = H/2, R = Math.max(W, H) * 0.8;
+  var ps = base.map(function(b, k){
+    var a = Math.random() * Math.PI * 2, d = R * (.6 + Math.random() * .7);
+    return {
+      tx: cx + b[0]*lado, ty: cy + b[1]*lado,
+      sx: cx + Math.cos(a)*d, sy: cy + Math.sin(a)*d,
+      // el retraso va por altura: el gecko se arma de arriba hacia abajo
+      r: .12 + (b[1] + .5) * .34 + Math.random() * .16,
+      g: 1 + Math.random() * .7
+    };
+  });
+
+  var t0 = performance.now(), DUR = 1700, FIN = 3400;
+  function paso(now){
+    var t = now - t0;
+    ctx.clearRect(0, 0, W, H);
+    for(var k = 0; k < ps.length; k++){
+      var p = ps[k];
+      var u = (t/DUR - p.r) / (1 - p.r);
+      if(u <= 0) continue;
+      if(u > 1) u = 1;
+      var e = 1 - Math.pow(1 - u, 3);                 // easeOutCubic
+      ctx.globalAlpha = Math.min(1, e * 1.5);
+      ctx.fillStyle = u < 1 ? '#9dffcb' : '#35d07f';
+      ctx.fillRect(p.sx + (p.tx - p.sx)*e, p.sy + (p.ty - p.sy)*e, p.g, p.g);
+    }
+    ctx.globalAlpha = 1;
+    if(t < FIN) esc._raf = requestAnimationFrame(paso);
+  }
+  esc._raf = requestAnimationFrame(paso);
+}
+
+/* ---- ver las cinco seguidas ---- */
+function todas(){
+  var e = [].slice.call(document.querySelectorAll('.escena')), i = 0;
+  var dur = [3400, 2800, 2600, 3800, 3600];
+  (function sig(){
+    if(i >= e.length) return;
+    e[i].scrollIntoView({behavior:'smooth', block:'center'});
+    correr(e[i]);
+    setTimeout(function(){ i++; sig(); }, dur[i] + 500);
+  })();
+}
+
+// primera pasada en cuanto cada escena entra en pantalla
+var io = new IntersectionObserver(function(ent, obs){
+  ent.forEach(function(x){
+    if(x.isIntersecting){ correr(x.target); obs.unobserve(x.target); }
+  });
+}, {threshold:.5});
+document.querySelectorAll('.escena').forEach(function(e){ io.observe(e); });
+</script>
+</body>
+</html>
