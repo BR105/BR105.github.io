@@ -6,14 +6,15 @@
 <meta name="robots" content="noindex">
 <title>Gecko Apps — intros de marca</title>
 <style>
-@font-face{font-family:'Mont';src:url('Montserrat-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
+@font-face{font-family:'Mont';src:url('Montserrat-Bold.ttf') format('truetype');font-weight:700;font-display:block}
 
 :root{
-  --bg:#0a0a0c; --surface:#141419; --hairline:rgba(255,255,255,.08);
+  --bg:#0a0a0c; --hairline:rgba(255,255,255,.08);
   --text:#ececf1; --text-dim:#9c9ca8;
   --accent:#35d07f; --accent-line:rgba(53,208,127,.35);
   --font:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;
   --ease:cubic-bezier(.16,1,.3,1);
+  --golpe:cubic-bezier(.2,1.5,.35,1);
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);
@@ -21,331 +22,270 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);
 .wrap{max-width:1000px;margin:0 auto}
 h1{font-size:clamp(22px,3.4vw,32px);letter-spacing:-.03em;margin:0 0 6px}
 h1 b{color:var(--accent)}
-.sub{color:var(--text-dim);font-size:15px;margin:0 0 26px;max-width:62ch;line-height:1.55}
-.barra{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:26px}
+.sub{color:var(--text-dim);font-size:15px;margin:0 0 22px;max-width:64ch;line-height:1.55}
+.barra{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-bottom:26px}
+.etq{font-size:12.5px;color:var(--text-dim);margin-right:2px}
 button{font:inherit;font-size:13px;font-weight:600;color:var(--text);cursor:pointer;
   background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);
   border-radius:9px;padding:8px 14px;transition:.2s var(--ease)}
 button:hover{background:rgba(53,208,127,.16);border-color:var(--accent-line)}
+button[aria-pressed=true]{background:rgba(53,208,127,.22);border-color:var(--accent);color:#eafff3}
 .pieza{margin-bottom:34px}
 .cab{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px}
 .num{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.14em}
 .tit{font-size:18px;font-weight:700;letter-spacing:-.02em}
-.desc{color:var(--text-dim);font-size:13.5px;margin:0 0 12px;line-height:1.5}
+.desc{color:var(--text-dim);font-size:13.5px;margin:0 0 12px;line-height:1.5;max-width:76ch}
 .dur{font-size:11.5px;color:var(--text-dim);border:1px solid var(--hairline);
   border-radius:999px;padding:2px 9px}
 
 /* ---------- escena ---------- */
 .escena{position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden;
-  border-radius:12px;border:1px solid var(--hairline);isolation:isolate}
+  border-radius:12px;border:1px solid var(--hairline);cursor:pointer;container-type:size}
+.escena *{--u:1cqw}            /* todo se mide contra la ESCENA, no contra la ventana */
 .capa{position:absolute;inset:0;display:grid;place-items:center}
-.emb,.gk{background:var(--accent);
+.gk{background:var(--accent);
+  -webkit-mask-image:url(../assets/gecko.png);mask-image:url(../assets/gecko.png);
   -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
   -webkit-mask-position:center;mask-position:center;
   -webkit-mask-size:contain;mask-size:contain}
-.emb{-webkit-mask-image:url(../assets/emblema.png);mask-image:url(../assets/emblema.png)}
-.gk{-webkit-mask-image:url(../assets/gecko.png);mask-image:url(../assets/gecko.png)}
 .palabra{font-family:'Mont',var(--font);font-weight:700;color:#fff;
-  letter-spacing:.34em;text-transform:uppercase;white-space:nowrap}
+  letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
 
-/* tamaños relativos a la ESCENA (no a la ventana): así se ve igual
-   en la página, a pantalla completa o al grabarla en 1920x1080 */
-.escena{container-type:size}
-.escena *{--u:1cqw}
+/* ============ A · CINÉTICO ============ */
+/* el hueco va justo en el centro: las dos palabras ocupan la mitad cada una */
+.eA .fila{display:flex;align-items:center;width:78%}
+.eA .hueco{width:19.9%;flex:none}          /* = 15.5% de la escena */
+.eA .p1,.eA .p2{font-size:calc(var(--u)*4.4);opacity:0;flex:1 1 0}
+.eA .p1{color:#fff;text-align:right;padding-right:2.4%}
+.eA .p2{color:var(--accent);text-align:left;padding-left:2.4%}
+.eA .aro,.eA .onda{position:absolute;width:15.5%;aspect-ratio:1;opacity:0;overflow:visible}
+.eA .aro circle{fill:none;stroke:var(--accent);stroke-width:2.6}
+.eA .onda circle{fill:none;stroke:rgba(53,208,127,.9);stroke-width:2}
+.eA .gk{position:absolute;width:7.9%;aspect-ratio:1;opacity:0}
+.eA .destello{position:absolute;width:15.5%;aspect-ratio:1;border-radius:50%;opacity:0;
+  background:radial-gradient(circle,rgba(53,208,127,.55),transparent 66%);filter:blur(16px)}
 
-/* ============ 1 · ENCENDIDO ============ */
-.e1 .halo{position:absolute;width:62%;aspect-ratio:1;border-radius:50%;opacity:0;
-  background:radial-gradient(circle,rgba(53,208,127,.45),transparent 62%);filter:blur(26px)}
-.e1 .em{width:37%;aspect-ratio:1;opacity:0}
-.e1 .barrido{position:absolute;left:0;right:0;height:2px;top:50%;opacity:0;
-  background:linear-gradient(90deg,transparent,rgba(53,208,127,.9),transparent);
-  box-shadow:0 0 22px rgba(53,208,127,.8)}
-.e1.go .barrido{animation:e1scan .5s var(--ease) .05s both}
-.e1.go .em{animation:e1on 2.1s linear .3s both}
-.e1.go .halo{animation:e1halo 2.4s var(--ease) .45s both}
-@keyframes e1scan{0%{opacity:0;transform:scaleX(.1)}25%{opacity:1}100%{opacity:0;transform:scaleX(1.1)}}
-@keyframes e1on{
-  0%{opacity:0;filter:brightness(.3)}
-  6%{opacity:.85;filter:brightness(2.4)}
-  9%{opacity:.05}
-  14%{opacity:.9;filter:brightness(1.6)}
-  17%{opacity:.1}
-  21%{opacity:1;filter:brightness(2.1)}
-  26%{opacity:.35}
-  34%{opacity:1;filter:brightness(1)}
-  100%{opacity:1;filter:brightness(1)}}
-@keyframes e1halo{0%{opacity:0;transform:scale(.6)}40%{opacity:1}100%{opacity:.55;transform:scale(1)}}
-@keyframes e1nom{0%{opacity:0;letter-spacing:1.3em}100%{opacity:.92;letter-spacing:.5em}}
+.eA.go .p1{animation:aIzq .62s var(--ease) .08s both}
+.eA.go .p2{animation:aDer .62s var(--ease) .08s both}
+.eA.go .aro{animation:aAro .72s var(--golpe) .54s both}
+.eA.go .onda{animation:aOnda .95s var(--ease) .56s both}
+.eA.go .destello{animation:aDest 1s var(--ease) .54s both}
+.eA.go .gk{animation:aGk .6s var(--golpe) .74s both}
+@keyframes aIzq{0%{opacity:0;transform:translateX(-30%)}100%{opacity:1;transform:translateX(0)}}
+@keyframes aDer{0%{opacity:0;transform:translateX(30%)}100%{opacity:1;transform:translateX(0)}}
+@keyframes aAro{0%{opacity:0;transform:scale(.08)}18%{opacity:1}100%{opacity:1;transform:scale(1)}}
+@keyframes aOnda{0%{opacity:.85;transform:scale(.3)}100%{opacity:0;transform:scale(4.2)}}
+@keyframes aDest{0%{opacity:0;transform:scale(.2)}22%{opacity:1}100%{opacity:.3;transform:scale(1.15)}}
+@keyframes aGk{0%{opacity:0;transform:scale(.25)}100%{opacity:1;transform:scale(1)}}
 
-/* ============ 2 · GARRA ============ */
-.e2{background:#07090b}
-.e2 .grano{position:absolute;inset:-30%;opacity:.16;pointer-events:none;mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
-.e2.go .grano{animation:e2grano .4s steps(4) infinite}
-@keyframes e2grano{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-2%)}100%{transform:translate(3%,1%)}}
-.e2 .tira{position:absolute;inset:0;display:grid;place-items:center;opacity:0;
-  -webkit-mask-image:linear-gradient(104deg,#000 42%,transparent 56%);mask-image:linear-gradient(104deg,#000 42%,transparent 56%);
-  -webkit-mask-size:280% 100%;mask-size:280% 100%;
-  -webkit-mask-position:110% 0;mask-position:110% 0}
-.e2 .t1{clip-path:polygon(0 0,100% 0,100% 26%,0 41%)}
-.e2 .t2{clip-path:polygon(0 41%,100% 26%,100% 57%,0 72%)}
-.e2 .t3{clip-path:polygon(0 72%,100% 57%,100% 100%,0 100%)}
-.e2 .tira .em{width:40%;aspect-ratio:1;background:#d8f5e6}
-.e2 .zarpa{position:absolute;top:-30%;left:-20%;width:150%;height:160%;opacity:0;
-  background:linear-gradient(104deg,transparent 46%,rgba(255,255,255,.95) 50%,transparent 54%);
-  filter:blur(1px)}
-.e2.go .t1{animation:e2rev .42s cubic-bezier(.3,.9,.2,1) .1s both}
-.e2.go .t2{animation:e2rev .42s cubic-bezier(.3,.9,.2,1) .26s both}
-.e2.go .t3{animation:e2rev .42s cubic-bezier(.3,.9,.2,1) .42s both}
-.e2.go .z1{animation:e2z .3s linear .08s both}
-.e2.go .z2{animation:e2z .3s linear .24s both}
-.e2.go .z3{animation:e2z .3s linear .40s both}
-.e2.go{animation:e2shake .62s ease-out .1s both}
-@keyframes e2rev{0%{opacity:1;-webkit-mask-position:110% 0;mask-position:110% 0}
-  100%{opacity:1;-webkit-mask-position:-10% 0;mask-position:-10% 0}}
-@keyframes e2z{0%{opacity:0;transform:translateX(42%)}30%{opacity:1}100%{opacity:0;transform:translateX(-42%)}}
-@keyframes e2shake{0%,100%{transform:translate(0,0)}
-  8%{transform:translate(-.5%,.4%)}18%{transform:translate(.6%,-.3%)}
-  32%{transform:translate(-.4%,-.5%)}46%{transform:translate(.3%,.3%)}60%{transform:translate(-.2%,.1%)}}
-.e2 .vis{position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(circle at 50% 50%,transparent 42%,rgba(0,0,0,.72))}
+/* ============ B · ENJAMBRE (todo en canvas) ============ */
+.eB canvas{position:absolute;inset:0;width:100%;height:100%}
 
-/* ============ 3 · CINÉTICO ============ */
-.e3 .fila{position:absolute;display:flex;align-items:center;gap:calc(var(--u)*.9)}
-.e3 .gk{width:calc(var(--u)*7.2);aspect-ratio:1;opacity:0;flex:none}
-.e3 .p1,.e3 .p2{font-size:calc(var(--u)*4.2);letter-spacing:-.02em;opacity:0}
-.e3 .p1{color:#fff}
-.e3 .p2{color:var(--accent)}
-.e3 .onda{position:absolute;width:12%;aspect-ratio:1;border-radius:50%;opacity:0;
-  border:2px solid rgba(53,208,127,.85)}
-.e3 .raya{position:absolute;left:0;right:0;height:calc(var(--u)*1.1);background:var(--accent);
-  transform:scaleX(0);transform-origin:left}
-.e3 .r1{top:30%}.e3 .r2{bottom:30%;transform-origin:right}
-.e3.go .r1{animation:e3raya .55s var(--ease) 0s both}
-.e3.go .r2{animation:e3raya .55s var(--ease) .06s both}
-.e3.go .p1{animation:e3izq .6s cubic-bezier(.2,1.2,.3,1) .42s both}
-.e3.go .p2{animation:e3der .6s cubic-bezier(.2,1.2,.3,1) .42s both}
-.e3.go .gk{animation:e3gk .5s cubic-bezier(.2,1.6,.4,1) .78s both}
-.e3.go .onda{animation:e3onda .9s var(--ease) .86s both}
-@keyframes e3raya{0%{transform:scaleX(0)}55%{transform:scaleX(1)}100%{transform:scaleX(0);transform-origin:right}}
-@keyframes e3izq{0%{opacity:0;transform:translateX(-38%)}100%{opacity:1;transform:translateX(0)}}
-@keyframes e3der{0%{opacity:0;transform:translateX(38%)}100%{opacity:1;transform:translateX(0)}}
-@keyframes e3gk{0%{opacity:0;transform:scale(2.4) rotate(-14deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
-@keyframes e3onda{0%{opacity:.9;transform:scale(.3)}100%{opacity:0;transform:scale(5)}}
-
-/* ============ 4 · ENJAMBRE ============ */
-.e4 canvas{position:absolute;inset:0;width:100%;height:100%}
-.e4 .aro{position:absolute;width:34%;aspect-ratio:1;opacity:0}
-.e4 .aro circle{fill:none;stroke:var(--accent);stroke-width:2.4;
-  stroke-dasharray:302;stroke-dashoffset:302}
-.e4 .nom{position:absolute;bottom:8%;font-size:calc(var(--u)*1.45);opacity:0;letter-spacing:.6em;transform:translateX(.3em)}
-.e4.go .aro{animation:e4aro 1s var(--ease) 1.55s both}
-.e4.go .aro circle{animation:e4traz 1.1s var(--ease) 1.55s both}
-.e4.go .nom{animation:e4nom 1s var(--ease) 2.25s both}
-@keyframes e4aro{0%{opacity:0;transform:scale(1.12)}100%{opacity:1;transform:scale(1)}}
-@keyframes e4traz{to{stroke-dashoffset:0}}
-@keyframes e4nom{0%{opacity:0;letter-spacing:1em}100%{opacity:.9;letter-spacing:.45em}}
-
-/* ============ 5 · VIDRIO ============ */
-.e5{background:radial-gradient(130% 110% at 50% 46%,#13241c 0%,#07090b 58%)}
-.e5 .resp{position:absolute;width:74%;aspect-ratio:1;border-radius:50%;opacity:0;
-  background:radial-gradient(circle,rgba(53,208,127,.3),transparent 60%);filter:blur(34px)}
-.e5 .em{width:31%;aspect-ratio:1;opacity:0;
-  background:linear-gradient(104deg,#35d07f 34%,#a8ffd3 48%,#ffffff 51%,#a8ffd3 54%,#35d07f 66%);
-  background-size:320% 100%;background-position:128% 0}
-.e5 .nom{position:absolute;bottom:9%;font-size:calc(var(--u)*1.5);opacity:0;letter-spacing:.7em;transform:translateX(.35em)}
-.e5 .linea{position:absolute;bottom:19%;height:1px;width:0;background:var(--accent-line)}
-.e5.go .resp{animation:e5resp 3s var(--ease) .1s both}
-.e5.go .em{animation:e5em 1.1s var(--ease) .25s both,e5brillo 1.5s var(--ease) .85s both}
-.e5.go .linea{animation:e5linea 1.1s var(--ease) 1.5s both}
-.e5.go .nom{animation:e5nom 1.3s var(--ease) 1.65s both}
-@keyframes e5resp{0%{opacity:0;transform:scale(.78)}45%{opacity:1}100%{opacity:.75;transform:scale(1.04)}}
-@keyframes e5em{0%{opacity:0;transform:perspective(900px) rotateY(16deg) scale(.9)}
-  100%{opacity:1;transform:perspective(900px) rotateY(0) scale(1)}}
-@keyframes e5brillo{0%{background-position:128% 0}100%{background-position:-28% 0}}
-@keyframes e5linea{0%{width:0;opacity:0}100%{width:26%;opacity:1}}
-@keyframes e5nom{0%{opacity:0;transform:translateY(8px);letter-spacing:1.1em}
-  100%{opacity:.95;transform:translateY(0);letter-spacing:.55em}}
-
-@media(prefers-reduced-motion:reduce){
-  .escena *{animation-duration:.01ms!important;animation-iteration-count:1!important}
-}
+@media(prefers-reduced-motion:reduce){.escena *{animation-duration:.01ms!important}}
 </style>
 </head>
 <body>
 <div class="wrap">
   <h1>Intros de <b>Gecko Apps</b></h1>
-  <p class="sub">Cinco cortinillas de estudio, todas con el emblema que ya tenemos. Dale a
-     cada «Repetir» para verlas una por una. Cuando elijas la que te guste la dejo fina y la
-     paso a video para meterla al principio de tus clips.</p>
+  <p class="sub">Las dos que elegiste, ya pulidas. Haz clic en cualquier escena para repetirla.
+     El nombre es intercambiable: las dos están dibujadas en vivo, así que la misma intro sirve
+     para <b>Gecko Apps</b> y para <b>Gecko Games</b> sin rehacer nada.</p>
+
   <div class="barra">
-    <button onclick="todas()">▶ Ver las cinco seguidas</button>
-    <button onclick="document.querySelectorAll('.escena').forEach(correr)">Repetir todas a la vez</button>
+    <span class="etq">Nombre:</span>
+    <button id="bApps"  aria-pressed="true"  onclick="marca('APPS')">GECKO APPS</button>
+    <button id="bGames" aria-pressed="false" onclick="marca('GAMES')">GECKO GAMES</button>
+    <span style="flex:1"></span>
+    <button onclick="document.querySelectorAll('.escena').forEach(correr)">Repetir las dos</button>
   </div>
 
-  <!-- 1 -->
+  <!-- A -->
   <div class="pieza">
-    <div class="cab"><span class="num">01</span><span class="tit">Encendido</span><span class="dur">3.0 s</span></div>
-    <p class="desc">Negro total, un barrido de luz y el emblema prende como un letrero de neón:
-       parpadea, se estabiliza y suelta el halo. Es la más «marca de estudio» clásica.</p>
-    <div class="escena e1" onclick="correr(this)">
-      <div class="capa"><span class="halo"></span></div>
-      <div class="capa"><span class="emb em"></span></div>
-      <div class="capa"><span class="barrido"></span></div>
-    </div>
-    <div class="barra" style="margin:10px 0 0"><button onclick="correr(this.closest('.pieza').querySelector('.escena'))">Repetir</button></div>
-  </div>
-
-  <!-- 2 -->
-  <div class="pieza">
-    <div class="cab"><span class="num">02</span><span class="tit">Garra</span><span class="dur">2.4 s</span></div>
-    <p class="desc">Tres zarpazos rasgan la pantalla y cada corte descubre una franja del emblema,
-       con grano de película y un temblor seco. Es la de Undead Labs / State of Decay.</p>
-    <div class="escena e2" onclick="correr(this)">
-      <div class="capa tira t1"><span class="emb em"></span></div>
-      <div class="capa tira t2"><span class="emb em"></span></div>
-      <div class="capa tira t3"><span class="emb em"></span></div>
-      <span class="zarpa z1"></span><span class="zarpa z2"></span><span class="zarpa z3"></span>
-      <span class="vis"></span><span class="grano"></span>
-    </div>
-    <div class="barra" style="margin:10px 0 0"><button onclick="correr(this.closest('.pieza').querySelector('.escena'))">Repetir</button></div>
-  </div>
-
-  <!-- 3 -->
-  <div class="pieza">
-    <div class="cab"><span class="num">03</span><span class="tit">Cinético</span><span class="dur">2.2 s</span></div>
-    <p class="desc">Dos barras cruzan, las palabras chocan en el centro y el gecko cae de golpe
-       con una onda de impacto. Corta, rápida y moderna: la que mejor va antes de un clip de app.</p>
-    <div class="escena e3" onclick="correr(this)">
-      <span class="raya r1"></span><span class="raya r2"></span>
+    <div class="cab"><span class="num">A</span><span class="tit">Cinético</span><span class="dur">2.6 s</span></div>
+    <p class="desc">Sin las barras del principio. Las palabras entran por los lados dejando un hueco
+       en medio; en ese hueco estalla un círculo que se expande, rebota y se queda de contenedor del
+       gecko. La onda sigue de largo y se apaga.</p>
+    <div class="escena eA" onclick="correr(this)">
+      <div class="capa"><span class="destello"></span></div>
       <div class="capa"><div class="fila">
         <span class="palabra p1">Gecko</span>
-        <span class="gk"></span>
-        <span class="palabra p2">Apps</span>
+        <span class="hueco"></span>
+        <span class="palabra p2 marca">Apps</span>
       </div></div>
-      <div class="capa"><span class="onda"></span></div>
+      <div class="capa"><svg class="aro" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47"/></svg></div>
+      <div class="capa"><span class="gk"></span></div>
+      <div class="capa"><svg class="onda" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47"/></svg></div>
     </div>
     <div class="barra" style="margin:10px 0 0"><button onclick="correr(this.closest('.pieza').querySelector('.escena'))">Repetir</button></div>
   </div>
 
-  <!-- 4 -->
+  <!-- B -->
   <div class="pieza">
-    <div class="cab"><span class="num">04</span><span class="tit">Enjambre</span><span class="dur">3.4 s</span></div>
-    <p class="desc">Mil partículas entran volando y se arman en la silueta del gecko; después se
-       traza el anillo alrededor. La más llamativa y la que más dice «esto lo hizo alguien».</p>
-    <div class="escena e4" data-canvas onclick="correr(this)">
-      <canvas></canvas>
-      <div class="capa"><svg class="aro" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48"/></svg></div>
-      <div class="capa"><span class="palabra nom">Gecko Apps</span></div>
-    </div>
-    <div class="barra" style="margin:10px 0 0"><button onclick="correr(this.closest('.pieza').querySelector('.escena'))">Repetir</button></div>
-  </div>
-
-  <!-- 5 -->
-  <div class="pieza">
-    <div class="cab"><span class="num">05</span><span class="tit">Vidrio</span><span class="dur">3.2 s</span></div>
-    <p class="desc">El emblema gira suave hacia el frente y un reflejo de luz lo recorre, sobre un
-       resplandor que respira. Es la más elegante y la que calca el estilo de la página.</p>
-    <div class="escena e5" onclick="correr(this)">
-      <div class="capa"><span class="resp"></span></div>
-      <div class="capa"><span class="emb em"></span></div>
-      <div class="capa"><span class="linea"></span></div>
-      <div class="capa"><span class="palabra nom">Gecko Apps</span></div>
-    </div>
+    <div class="cab"><span class="num">B</span><span class="tit">Enjambre</span><span class="dur">4.4 s</span></div>
+    <p class="desc">El enjambre arma el gecko, se cierra el anillo de dentro y después uno más grande
+       alrededor; entre los dos, las letras llegan también como partículas y se acomodan sobre la
+       curva, igual que en el emblema de la app.</p>
+    <div class="escena eB" onclick="correr(this)"><canvas></canvas></div>
     <div class="barra" style="margin:10px 0 0"><button onclick="correr(this.closest('.pieza').querySelector('.escena'))">Repetir</button></div>
   </div>
 </div>
 
 <script>
-function correr(el){
-  el.classList.remove('go');
-  void el.offsetWidth;          // reinicia las animaciones CSS
-  el.classList.add('go');
-  if(el.hasAttribute('data-canvas')) enjambre(el);
+var MARCA = 'APPS';                       // APPS | GAMES
+var VERDE = '#35d07f', CLARO = '#a8ffd3';
+
+function marca(m){
+  MARCA = m;
+  document.getElementById('bApps').setAttribute('aria-pressed', m === 'APPS');
+  document.getElementById('bGames').setAttribute('aria-pressed', m === 'GAMES');
+  document.querySelectorAll('.marca').forEach(function(e){ e.textContent = m === 'APPS' ? 'Apps' : 'Games'; });
+  cacheTexto = null;                      // el enjambre tiene que volver a muestrear
+  document.querySelectorAll('.escena').forEach(correr);
 }
 
-/* ---- intro 4: partículas que forman el gecko ---- */
-var puntos = null, imgGk = new Image();
-imgGk.src = '../assets/gecko.png';
+function correr(el){
+  el.classList.remove('go');
+  void el.offsetWidth;                    // reinicia las animaciones CSS
+  el.classList.add('go');
+  if(el.classList.contains('eB')) enjambre(el);
+}
 
-function muestrear(){
-  if(puntos) return puntos;
-  var L = 260, c = document.createElement('canvas');
-  c.width = c.height = L;
+/* ===================== ENJAMBRE ===================== */
+var imgGk = new Image(); imgGk.src = '../assets/gecko.png';
+var cacheGk = null, cacheTexto = null;
+
+/* puntos del gecko, en unidades -0.5..0.5 */
+function puntosGecko(){
+  if(cacheGk) return cacheGk;
+  var L = 300, c = document.createElement('canvas'); c.width = c.height = L;
   var x = c.getContext('2d', {willReadFrequently:true});
   x.drawImage(imgGk, 0, 0, L, L);
   var d = x.getImageData(0, 0, L, L).data, p = [];
-  for(var j = 0; j < L; j += 2){
-    for(var i = 0; i < L; i += 2){
-      if(d[(j*L + i)*4 + 3] > 130) p.push([i/L - .5, j/L - .5]);
-    }
-  }
-  puntos = p;
-  return p;
+  for(var j = 0; j < L; j += 2) for(var i = 0; i < L; i += 2)
+    if(d[(j*L + i)*4 + 3] > 130) p.push([i/L - .5, j/L - .5]);
+  cacheGk = p; return p;
 }
+
+/* puntos del texto, en unidades de ALTURA de fuente (x hacia los lados, y arriba/abajo) */
+function puntosTexto(){
+  if(cacheTexto) return cacheTexto;
+  var txt = 'GECKO ' + MARCA, F = 60, pad = 14;
+  var med = document.createElement('canvas').getContext('2d');
+  med.font = '700 ' + F + 'px Mont, sans-serif';
+  med.letterSpacing = '7px';
+  var w = Math.ceil(med.measureText(txt).width) + pad*2, h = F + pad*2;
+  var c = document.createElement('canvas'); c.width = w; c.height = h;
+  var x = c.getContext('2d', {willReadFrequently:true});
+  x.font = '700 ' + F + 'px Mont, sans-serif';
+  x.letterSpacing = '7px';
+  x.textBaseline = 'middle'; x.fillStyle = '#fff';
+  x.fillText(txt, pad, h/2);
+  var d = x.getImageData(0, 0, w, h).data, p = [], min = 1e9, max = -1e9;
+  for(var j = 0; j < h; j += 2) for(var i = 0; i < w; i += 2)
+    if(d[(j*w + i)*4 + 3] > 130){
+      p.push([i/F, (j - h/2)/F]);
+      if(i < min) min = i; if(i > max) max = i;
+    }
+  // se centra por la TINTA, no por la caja: el espaciado entre letras deja aire
+  // de más al final y si no, el nombre queda chueco sobre la curva.
+  var medio = (min + max)/2/F;
+  for(var k = 0; k < p.length; k++) p[k][0] -= medio;
+  cacheTexto = {p:p, ancho:(max - min)/F}; return cacheTexto;
+}
+
+/* tiempos, en ms */
+var T = {gkIni:0, gkDur:1150, gkEsc:620,      // enjambre del gecko
+         a1:1450, a1Dur:850,                  // anillo interior
+         a2:1950, a2Dur:950,                  // anillo exterior
+         txIni:2350, txDur:1100, txEsc:650,   // letras
+         fin:4400};
 
 function enjambre(esc){
   var cv = esc.querySelector('canvas'), ctx = cv.getContext('2d');
   if(esc._raf) cancelAnimationFrame(esc._raf);
-  if(!imgGk.complete){ imgGk.onload = function(){ enjambre(esc); }; return; }
+  if(!imgGk.complete){ imgGk.addEventListener('load', function(){ enjambre(esc); }, {once:true}); return; }
 
   var dpr = Math.min(devicePixelRatio || 1, 2);
   var W = cv.clientWidth, H = cv.clientHeight;
+  if(!W || !H) return;
   cv.width = W*dpr; cv.height = H*dpr;
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-  var base = muestrear(), lado = Math.min(W, H) * 0.40;
-  var cx = W/2, cy = H/2, R = Math.max(W, H) * 0.8;
-  var ps = base.map(function(b, k){
-    var a = Math.random() * Math.PI * 2, d = R * (.6 + Math.random() * .7);
-    return {
-      tx: cx + b[0]*lado, ty: cy + b[1]*lado,
-      sx: cx + Math.cos(a)*d, sy: cy + Math.sin(a)*d,
-      // el retraso va por altura: el gecko se arma de arriba hacia abajo
-      r: .12 + (b[1] + .5) * .34 + Math.random() * .16,
-      g: 1 + Math.random() * .7
-    };
+  var S = Math.min(W, H), cx = W/2, cy = H/2;
+  var ladoGk = S*0.355, rIn = S*0.245, rTx = S*0.325, rOut = S*0.405;
+  var fuera = Math.max(W, H)*0.85;
+  var tx = puntosTexto(), LS = S*0.052;              // alto de letra
+  // si el nombre no cabe en el arco, se encoge
+  var barrido = (tx.ancho*LS)/rTx;
+  if(barrido > 2.1){ LS *= 2.1/barrido; barrido = 2.1; }
+
+  function volando(destX, destY, retraso){
+    var a = Math.random()*Math.PI*2, d = fuera*(.55 + Math.random()*.7);
+    return {tx:destX, ty:destY, sx:cx + Math.cos(a)*d, sy:cy + Math.sin(a)*d,
+            r:retraso, g:1 + Math.random()*.7};
+  }
+
+  // gecko: el retraso va por altura, se arma de arriba hacia abajo
+  var ps = puntosGecko().map(function(b){
+    return volando(cx + b[0]*ladoGk, cy + b[1]*ladoGk,
+                   T.gkIni + (b[1] + .5)*T.gkEsc + Math.random()*140);
   });
 
-  var t0 = performance.now(), DUR = 1700, FIN = 3400;
-  function paso(now){
-    var t = now - t0;
-    ctx.clearRect(0, 0, W, H);
-    for(var k = 0; k < ps.length; k++){
-      var p = ps[k];
-      var u = (t/DUR - p.r) / (1 - p.r);
+  // letras: sobre el arco de arriba, igual que el emblema
+  var pt = tx.p.map(function(b){
+    var ang = -Math.PI/2 + (b[0]*LS)/rTx;
+    var rad = rTx - b[1]*LS;
+    return volando(cx + rad*Math.cos(ang), cy + rad*Math.sin(ang),
+                   T.txIni + (b[0]/tx.ancho + .5)*T.txEsc + Math.random()*120);
+  });
+
+  function dibujar(lista, dur, ahora){
+    for(var k = 0; k < lista.length; k++){
+      var p = lista[k], u = (ahora - p.r)/dur;
       if(u <= 0) continue;
       if(u > 1) u = 1;
-      var e = 1 - Math.pow(1 - u, 3);                 // easeOutCubic
-      ctx.globalAlpha = Math.min(1, e * 1.5);
-      ctx.fillStyle = u < 1 ? '#9dffcb' : '#35d07f';
+      var e = 1 - Math.pow(1 - u, 3);
+      ctx.globalAlpha = Math.min(1, e*1.6);
+      ctx.fillStyle = u < 1 ? CLARO : VERDE;
       ctx.fillRect(p.sx + (p.tx - p.sx)*e, p.sy + (p.ty - p.sy)*e, p.g, p.g);
     }
     ctx.globalAlpha = 1;
-    if(t < FIN) esc._raf = requestAnimationFrame(paso);
+  }
+
+  function anillo(r, ini, dur, ahora, grosor){
+    var u = (ahora - ini)/dur;
+    if(u <= 0) return;
+    if(u > 1) u = 1;
+    var e = 1 - Math.pow(1 - u, 3);
+    ctx.save();
+    ctx.strokeStyle = VERDE; ctx.lineWidth = grosor; ctx.lineCap = 'round';
+    ctx.shadowColor = 'rgba(53,208,127,.6)'; ctx.shadowBlur = 14;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, -Math.PI/2, -Math.PI/2 + Math.PI*2*e);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  var t0 = performance.now();
+  function paso(now){
+    var t = now - t0;
+    ctx.clearRect(0, 0, W, H);
+    dibujar(ps, T.gkDur, t);
+    anillo(rIn,  T.a1, T.a1Dur, t, 2.6);
+    anillo(rOut, T.a2, T.a2Dur, t, 1.6);
+    dibujar(pt, T.txDur, t);
+    if(t < T.fin) esc._raf = requestAnimationFrame(paso);
   }
   esc._raf = requestAnimationFrame(paso);
 }
 
-/* ---- ver las cinco seguidas ---- */
-function todas(){
-  var e = [].slice.call(document.querySelectorAll('.escena')), i = 0;
-  var dur = [3400, 2800, 2600, 3800, 3600];
-  (function sig(){
-    if(i >= e.length) return;
-    e[i].scrollIntoView({behavior:'smooth', block:'center'});
-    correr(e[i]);
-    setTimeout(function(){ i++; sig(); }, dur[i] + 500);
-  })();
-}
-
-// primera pasada en cuanto cada escena entra en pantalla
-var io = new IntersectionObserver(function(ent, obs){
-  ent.forEach(function(x){
-    if(x.isIntersecting){ correr(x.target); obs.unobserve(x.target); }
-  });
-}, {threshold:.5});
-document.querySelectorAll('.escena').forEach(function(e){ io.observe(e); });
+/* primera pasada cuando cada escena entra en pantalla */
+document.fonts.load('700 60px Mont').then(function(){
+  var io = new IntersectionObserver(function(ent, obs){
+    ent.forEach(function(x){ if(x.isIntersecting){ correr(x.target); obs.unobserve(x.target); } });
+  }, {threshold:.5});
+  document.querySelectorAll('.escena').forEach(function(e){ io.observe(e); });
+});
 </script>
 </body>
 </html>
