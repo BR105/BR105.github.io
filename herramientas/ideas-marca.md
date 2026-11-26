@@ -9,16 +9,18 @@ documentación del sitio: es el bote de ideas de la identidad.
   «GECKO APPS» arriba *y* abajo. A partir de ahora: **GECKO arriba, APPS
   abajo**. Con una palabra por lado las letras caben más grandes, y la
   submarca sale cambiando solo la de abajo: **GECKO / GAMES**.
-- **El círculo pasa a ser una variación, no la marca principal.** La marca
-  de cabecera debería ser más simple, al estilo de Razer, Redragon, Corsair,
-  XPG o Game Factor: un símbolo sólido y solo, sin aro ni texto dentro. El
-  emblema redondo queda como sello: portada, intros, calcomanías, mercancía.
+- **El emblema redondo se queda como marca principal.** Se probó sustituirlo
+  por un símbolo más simple al estilo Razer o Corsair y no funcionó (ver más
+  abajo); el aro con el gecko sigue siendo la marca.
+- **Gecko Games conserva el verde del estudio** (`#35d07f`), no lleva color
+  propio. Las dos marcas son el mismo estudio: lo único que las separa es la
+  palabra de abajo del emblema. Los colores propios siguen siendo de cada
+  app (Zynora violeta, Vocyra naranja, Opsira rojo), no de las marcas.
 - **Las intros elegidas son dos:** la cinética (las palabras entran por los
   lados y el círculo estalla en medio y se queda de contenedor) y la del
   enjambre (las partículas arman el gecko, se cierran dos anillos y el nombre
   se acomoda sobre la curva). Las dos dibujan el nombre en vivo, así que la
   misma intro sirve para Apps y para Games.
-
 - **El reparto es el «Clásico», y ya está puesto.** Líneas finas arriba con
   GECKO, banda rellena abajo con APPS calado. Mantiene el esqueleto de
   siempre, así que no se siente un logo nuevo, pero ya no repite el nombre.
@@ -74,6 +76,5 @@ uno recortado para abajo).
 ## Pendiente de decidir
 
 - Qué intro le toca a Gecko Apps y cuál a Gecko Games.
-- Si Gecko Games lleva el mismo verde del estudio o color propio.
 - Pasar la intro elegida a video (MP4 1920×1080, o WebM con transparencia) y
   ver si lleva sonido; el sonido habría que conseguirlo con licencia libre.
