@@ -87,6 +87,17 @@ body.captura .escena{position:fixed;inset:0;width:100vw;height:100vh;
 /* ============ B · ENJAMBRE (todo en canvas) ============ */
 .eB canvas{position:absolute;inset:0;width:100%;height:100%}
 
+/* ---------- vivo / video ---------- */
+.marco{position:relative}
+.marco video{display:none;width:100%;aspect-ratio:16/9;background:#000;
+  border-radius:12px;border:1px solid var(--hairline)}
+.marco.vid .escena{display:none}
+.marco.vid video{display:block}
+.pie{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.pie .dato{font-size:11.5px;color:var(--text-dim);margin-left:auto}
+.pie a{font-size:12.5px;color:var(--accent);text-decoration:none;border-bottom:1px solid transparent}
+.pie a:hover{border-bottom-color:var(--accent-line)}
+
 @media(prefers-reduced-motion:reduce){.escena *{animation-duration:.01ms!important}}
 </style>
 </head>
@@ -104,6 +115,9 @@ body.captura .escena{position:fixed;inset:0;width:100vw;height:100vh;
     <span style="flex:1"></span>
     <button onclick="document.querySelectorAll('.escena').forEach(correr)">Repetir las dos</button>
   </div>
+  <p class="sub" id="aviso" style="display:none;color:#ffb86b;margin:-14px 0 22px">
+     Ojo: los MP4 están grabados con <b>GECKO APPS</b>. En «Video» vas a ver ese nombre
+     aunque arriba esté puesto GAMES; la escena en vivo sí cambia.</p>
 
   <!-- A -->
   <div class="pieza">
@@ -111,6 +125,7 @@ body.captura .escena{position:fixed;inset:0;width:100vw;height:100vh;
     <p class="desc">Sin las barras del principio. Las palabras entran por los lados dejando un hueco
        en medio; en ese hueco estalla un círculo que se expande, rebota y se queda de contenedor del
        gecko. La onda sigue de largo y se apaga.</p>
+    <div class="marco">
     <div class="escena eA" onclick="correr(this)">
       <div class="capa"><span class="destello"></span></div>
       <div class="capa"><div class="fila">
@@ -122,7 +137,15 @@ body.captura .escena{position:fixed;inset:0;width:100vw;height:100vh;
       <div class="capa"><span class="gk"></span></div>
       <div class="capa"><svg class="onda" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47"/></svg></div>
     </div>
-    <div class="barra" style="margin:10px 0 0"><button onclick="correr(this.closest('.pieza').querySelector('.escena'))">Repetir</button></div>
+      <video src="video/intro-a-apps.mp4" controls loop muted playsinline preload="none"></video>
+    </div>
+    <div class="pie">
+      <button onclick="verAsi(this, false)" aria-pressed="true">En vivo</button>
+      <button onclick="verAsi(this, true)" aria-pressed="false">Video</button>
+      <button onclick="correr(this.closest('.pieza').querySelector('.escena'))">Repetir</button>
+      <a href="video/intro-a-apps.mp4" download>Descargar MP4</a>
+      <span class="dato">1920×1080 · 30 fps · 146 KB · sin sonido</span>
+    </div>
   </div>
 
   <!-- B -->
@@ -131,8 +154,17 @@ body.captura .escena{position:fixed;inset:0;width:100vw;height:100vh;
     <p class="desc">El enjambre arma el gecko, se cierra el anillo de dentro y después uno más grande
        alrededor; entre los dos, las letras llegan también como partículas y se acomodan sobre la
        curva, igual que en el emblema de la app.</p>
-    <div class="escena eB" onclick="correr(this)"><canvas></canvas></div>
-    <div class="barra" style="margin:10px 0 0"><button onclick="correr(this.closest('.pieza').querySelector('.escena'))">Repetir</button></div>
+    <div class="marco">
+      <div class="escena eB" onclick="correr(this)"><canvas></canvas></div>
+      <video src="video/intro-b-apps.mp4" controls loop muted playsinline preload="none"></video>
+    </div>
+    <div class="pie">
+      <button onclick="verAsi(this, false)" aria-pressed="true">En vivo</button>
+      <button onclick="verAsi(this, true)" aria-pressed="false">Video</button>
+      <button onclick="correr(this.closest('.pieza').querySelector('.escena'))">Repetir</button>
+      <a href="video/intro-b-apps.mp4" download>Descargar MP4</a>
+      <span class="dato">1920×1080 · 30 fps · 2.4 MB · sin sonido</span>
+    </div>
   </div>
 </div>
 
@@ -146,7 +178,19 @@ function marca(m){
   document.getElementById('bGames').setAttribute('aria-pressed', m === 'GAMES');
   document.querySelectorAll('.marca').forEach(function(e){ e.textContent = m === 'APPS' ? 'Apps' : 'Games'; });
   cacheTexto = null;                      // el enjambre tiene que volver a muestrear
+  document.getElementById('aviso').style.display = m === 'GAMES' ? 'block' : 'none';
   document.querySelectorAll('.escena').forEach(correr);
+}
+
+/* cambia entre la escena en vivo y el MP4 ya grabado */
+function verAsi(btn, esVideo){
+  var pieza = btn.closest('.pieza'), marco = pieza.querySelector('.marco');
+  marco.classList.toggle('vid', esVideo);
+  pieza.querySelectorAll('.pie button').forEach(function(b, i){
+    if(i < 2) b.setAttribute('aria-pressed', (i === 1) === esVideo);
+  });
+  var v = marco.querySelector('video');
+  if(esVideo){ v.play().catch(function(){}); } else { v.pause(); }
 }
 
 function correr(el){
