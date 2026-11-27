@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Gecko Apps — intros de marca</title>
+<title>Intros de Gecko Apps</title>
 <style>
 @font-face{font-family:'Mont';src:url('Montserrat-Bold.ttf') format('truetype');font-weight:700;font-display:block}
 
@@ -14,17 +14,17 @@
   --accent:#35d07f; --accent-line:rgba(53,208,127,.35);
   --font:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;
   --ease:cubic-bezier(.16,1,.3,1);
-  --golpe:cubic-bezier(.2,1.5,.35,1);
+  color-scheme:dark;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);
-  padding:28px 20px 70px;-webkit-font-smoothing:antialiased}
+  padding-block:28px 70px;-webkit-font-smoothing:antialiased;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px))}
 .wrap{max-width:1000px;margin:0 auto}
 h1{font-size:clamp(22px,3.4vw,32px);letter-spacing:-.03em;margin:0 0 6px}
 h1 b{color:var(--accent)}
-.sub{color:var(--text-dim);font-size:15px;margin:0 0 22px;max-width:64ch;line-height:1.55}
-.barra{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-bottom:26px}
-.etq{font-size:12.5px;color:var(--text-dim);margin-right:2px}
+.sub{color:var(--text-dim);font-size:15px;margin:0 0 26px;max-width:64ch;line-height:1.55}
 button{font:inherit;font-size:13px;font-weight:600;color:var(--text);cursor:pointer;
   background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);
   border-radius:9px;padding:8px 14px;transition:.2s var(--ease)}
@@ -38,56 +38,10 @@ button[aria-pressed=true]{background:rgba(53,208,127,.22);border-color:var(--acc
 .dur{font-size:11.5px;color:var(--text-dim);border:1px solid var(--hairline);
   border-radius:999px;padding:2px 9px}
 
-/* ---------- escena ---------- */
 .escena{position:relative;width:100%;aspect-ratio:16/9;background:#000;overflow:hidden;
-  border-radius:12px;border:1px solid var(--hairline);cursor:pointer;container-type:size}
-.escena *{--u:1cqw}            /* todo se mide contra la ESCENA, no contra la ventana */
+  border-radius:12px;border:1px solid var(--hairline);cursor:pointer}
+.escena canvas{position:absolute;inset:0;width:100%;height:100%}
 
-/* Modo captura: ?captura=A&t=1234 deja una sola escena a pantalla completa y
-   congelada en ese milisegundo, para sacarle una foto desde Edge headless. */
-body.captura{margin:0;padding:0;background:#000;overflow:hidden}
-body.captura .escena{position:fixed;inset:0;width:100vw;height:100vh;
-  aspect-ratio:auto;border:0;border-radius:0;cursor:default}
-.capa{position:absolute;inset:0;display:grid;place-items:center}
-.gk{background:var(--accent);
-  -webkit-mask-image:url(../assets/gecko.png);mask-image:url(../assets/gecko.png);
-  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
-  -webkit-mask-position:center;mask-position:center;
-  -webkit-mask-size:contain;mask-size:contain}
-.palabra{font-family:'Mont',var(--font);font-weight:700;color:#fff;
-  letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
-
-/* ============ A · CINÉTICO ============ */
-/* el hueco va justo en el centro: las dos palabras ocupan la mitad cada una */
-.eA .fila{display:flex;align-items:center;width:78%}
-.eA .hueco{width:19.9%;flex:none}          /* = 15.5% de la escena */
-.eA .p1,.eA .p2{font-size:calc(var(--u)*4.4);opacity:0;flex:1 1 0}
-.eA .p1{color:#fff;text-align:right;padding-right:2.4%}
-.eA .p2{color:var(--accent);text-align:left;padding-left:2.4%}
-.eA .aro,.eA .onda{position:absolute;width:15.5%;aspect-ratio:1;opacity:0;overflow:visible}
-.eA .aro circle{fill:none;stroke:var(--accent);stroke-width:2.6}
-.eA .onda circle{fill:none;stroke:rgba(53,208,127,.9);stroke-width:2}
-.eA .gk{position:absolute;width:7.9%;aspect-ratio:1;opacity:0}
-.eA .destello{position:absolute;width:15.5%;aspect-ratio:1;border-radius:50%;opacity:0;
-  background:radial-gradient(circle,rgba(53,208,127,.55),transparent 66%);filter:blur(16px)}
-
-.eA.go .p1{animation:aIzq .62s var(--ease) .08s both}
-.eA.go .p2{animation:aDer .62s var(--ease) .08s both}
-.eA.go .aro{animation:aAro .72s var(--golpe) .54s both}
-.eA.go .onda{animation:aOnda .95s var(--ease) .56s both}
-.eA.go .destello{animation:aDest 1s var(--ease) .54s both}
-.eA.go .gk{animation:aGk .6s var(--golpe) .74s both}
-@keyframes aIzq{0%{opacity:0;transform:translateX(-30%)}100%{opacity:1;transform:translateX(0)}}
-@keyframes aDer{0%{opacity:0;transform:translateX(30%)}100%{opacity:1;transform:translateX(0)}}
-@keyframes aAro{0%{opacity:0;transform:scale(.08)}18%{opacity:1}100%{opacity:1;transform:scale(1)}}
-@keyframes aOnda{0%{opacity:.85;transform:scale(.3)}100%{opacity:0;transform:scale(4.2)}}
-@keyframes aDest{0%{opacity:0;transform:scale(.2)}22%{opacity:1}100%{opacity:.3;transform:scale(1.15)}}
-@keyframes aGk{0%{opacity:0;transform:scale(.25)}100%{opacity:1;transform:scale(1)}}
-
-/* ============ B · ENJAMBRE (todo en canvas) ============ */
-.eB canvas{position:absolute;inset:0;width:100%;height:100%}
-
-/* ---------- vivo / video ---------- */
 .marco{position:relative}
 .marco video{display:none;width:100%;aspect-ratio:16/9;background:#000;
   border-radius:12px;border:1px solid var(--hairline)}
@@ -95,167 +49,314 @@ body.captura .escena{position:fixed;inset:0;width:100vw;height:100vh;
 .marco.vid video{display:block}
 .pie{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:10px}
 .pie .dato{font-size:11.5px;color:var(--text-dim);margin-left:auto}
-.pie a{font-size:12.5px;color:var(--accent);text-decoration:none;border-bottom:1px solid transparent}
-.pie a:hover{border-bottom-color:var(--accent-line)}
 
-@media(prefers-reduced-motion:reduce){.escena *{animation-duration:.01ms!important}}
+/* Modo captura: ?captura=A|B&t=1234 deja una sola escena a pantalla completa y
+   congelada en ese milisegundo, para sacarle una foto desde Edge headless. */
+body.captura{margin:0;padding:0;background:#000;overflow:hidden}
+body.captura .escena{position:fixed;inset:0;width:100vw;height:100vh;
+  aspect-ratio:auto;border:0;border-radius:0;cursor:default}
 </style>
 </head>
 <body>
 <div class="wrap">
   <h1>Intros de <b>Gecko Apps</b></h1>
-  <p class="sub">Las dos que elegiste, ya pulidas. Haz clic en cualquier escena para repetirla.
-     El nombre es intercambiable: las dos están dibujadas en vivo, así que la misma intro sirve
-     para <b>Gecko Apps</b> y para <b>Gecko Games</b> sin rehacer nada.</p>
-
-  <div class="barra">
-    <span class="etq">Nombre:</span>
-    <button id="bApps"  aria-pressed="true"  onclick="marca('APPS')">GECKO APPS</button>
-    <button id="bGames" aria-pressed="false" onclick="marca('GAMES')">GECKO GAMES</button>
-    <span style="flex:1"></span>
-    <button onclick="document.querySelectorAll('.escena').forEach(correr)">Repetir las dos</button>
-  </div>
-  <p class="sub" id="aviso" style="display:none;color:#ffb86b;margin:-14px 0 22px">
-     Ojo: los MP4 están grabados con <b>GECKO APPS</b>. En «Video» vas a ver ese nombre
-     aunque arriba esté puesto GAMES; la escena en vivo sí cambia.</p>
+  <p class="sub">Una para cada marca. Haz clic en cualquier escena para repetirla, o cambia a
+     «Video» para verla cuadro a cuadro en el MP4 ya renderizado.</p>
 
   <!-- A -->
   <div class="pieza">
-    <div class="cab"><span class="num">A</span><span class="tit">Cinético</span><span class="dur">2.6 s</span></div>
-    <p class="desc">Sin las barras del principio. Las palabras entran por los lados dejando un hueco
-       en medio; en ese hueco estalla un círculo que se expande, rebota y se queda de contenedor del
-       gecko. La onda sigue de largo y se apaga.</p>
+    <div class="cab"><span class="num">A</span><span class="tit">Gecko Apps · cinética</span><span class="dur">3.2 s</span></div>
+    <p class="desc">Empieza con un destello en el centro, sin círculo. Las palabras entran por los
+       lados; cuando llegan, el destello estalla y salen los dos círculos. Al mismo tiempo las letras
+       giran en sentido del reloj y se van curvando hasta quedar encerradas dentro del aro: GECKO
+       arriba en positivo y APPS abajo calado en la banda, que es el emblema clásico.</p>
     <div class="marco">
-    <div class="escena eA" onclick="correr(this)">
-      <div class="capa"><span class="destello"></span></div>
-      <div class="capa"><div class="fila">
-        <span class="palabra p1">Gecko</span>
-        <span class="hueco"></span>
-        <span class="palabra p2 marca">Apps</span>
-      </div></div>
-      <div class="capa"><svg class="aro" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47"/></svg></div>
-      <div class="capa"><span class="gk"></span></div>
-      <div class="capa"><svg class="onda" viewBox="0 0 100 100"><circle cx="50" cy="50" r="47"/></svg></div>
-    </div>
-      <video src="video/intro-a-apps.mp4" controls loop muted playsinline preload="none"></video>
+      <div class="escena eA" onclick="correr(this)"><canvas></canvas></div>
+      <video src="video/intro-apps.mp4" controls loop muted playsinline preload="none"></video>
     </div>
     <div class="pie">
       <button onclick="verAsi(this, false)" aria-pressed="true">En vivo</button>
       <button onclick="verAsi(this, true)" aria-pressed="false">Video</button>
       <button onclick="correr(this.closest('.pieza').querySelector('.escena'))">Repetir</button>
-      <a href="video/intro-a-apps.mp4" download>Descargar MP4</a>
-      <span class="dato">1920×1080 · 30 fps · 146 KB · sin sonido</span>
+      <span class="dato">1920×1080 · 30 fps · sin sonido</span>
     </div>
   </div>
 
   <!-- B -->
   <div class="pieza">
-    <div class="cab"><span class="num">B</span><span class="tit">Enjambre</span><span class="dur">4.4 s</span></div>
-    <p class="desc">El enjambre arma el gecko, se cierra el anillo de dentro y después uno más grande
-       alrededor; entre los dos, las letras llegan también como partículas y se acomodan sobre la
-       curva, igual que en el emblema de la app.</p>
+    <div class="cab"><span class="num">B</span><span class="tit">Gecko Games · enjambre</span><span class="dur">4.0 s</span></div>
+    <p class="desc">Sin círculos. El enjambre arma el gecko y después llegan las letras, también
+       como partículas: GECKO curvado arriba y GAMES curvado abajo, con el bicho en medio.</p>
     <div class="marco">
       <div class="escena eB" onclick="correr(this)"><canvas></canvas></div>
-      <video src="video/intro-b-apps.mp4" controls loop muted playsinline preload="none"></video>
+      <video src="video/intro-games.mp4" controls loop muted playsinline preload="none"></video>
     </div>
     <div class="pie">
       <button onclick="verAsi(this, false)" aria-pressed="true">En vivo</button>
       <button onclick="verAsi(this, true)" aria-pressed="false">Video</button>
       <button onclick="correr(this.closest('.pieza').querySelector('.escena'))">Repetir</button>
-      <a href="video/intro-b-apps.mp4" download>Descargar MP4</a>
-      <span class="dato">1920×1080 · 30 fps · 2.4 MB · sin sonido</span>
+      <span class="dato">1920×1080 · 30 fps · sin sonido</span>
     </div>
   </div>
 </div>
 
 <script>
-var MARCA = 'APPS';                       // APPS | GAMES
 var VERDE = '#35d07f', CLARO = '#a8ffd3';
+var imgGk = new Image(); imgGk.src = '../assets/gecko.png';
 
-function marca(m){
-  MARCA = m;
-  document.getElementById('bApps').setAttribute('aria-pressed', m === 'APPS');
-  document.getElementById('bGames').setAttribute('aria-pressed', m === 'GAMES');
-  document.querySelectorAll('.marca').forEach(function(e){ e.textContent = m === 'APPS' ? 'Apps' : 'Games'; });
-  cacheTexto = null;                      // el enjambre tiene que volver a muestrear
-  document.getElementById('aviso').style.display = m === 'GAMES' ? 'block' : 'none';
-  document.querySelectorAll('.escena').forEach(correr);
-}
-
-/* cambia entre la escena en vivo y el MP4 ya grabado */
-function verAsi(btn, esVideo){
-  var pieza = btn.closest('.pieza'), marco = pieza.querySelector('.marco');
-  marco.classList.toggle('vid', esVideo);
-  pieza.querySelectorAll('.pie button').forEach(function(b, i){
-    if(i < 2) b.setAttribute('aria-pressed', (i === 1) === esVideo);
-  });
-  var v = marco.querySelector('video');
-  if(esVideo){ v.play().catch(function(){}); } else { v.pause(); }
-}
-
-function correr(el){
-  el.classList.remove('go');
-  void el.offsetWidth;                    // reinicia las animaciones CSS
-  el.classList.add('go');
-  if(el.classList.contains('eB')) enjambre(el);
-}
-
-/* ===================== ENJAMBRE ===================== */
 /* Azar con semilla fija: el enjambre tiene que salir IGUAL en cada pasada, o
    la captura cuadro a cuadro (un Edge por cuadro) daria un hormiguero. */
 var _sem = 0;
 function rnd(){ _sem = (_sem * 1103515245 + 12345) & 0x7fffffff; return _sem / 0x7fffffff; }
 
-var imgGk = new Image(); imgGk.src = '../assets/gecko.png';
-var cacheGk = null, cacheTexto = null;
+function lim(u){ return u < 0 ? 0 : u > 1 ? 1 : u; }
+function salida(u){ return 1 - Math.pow(1 - u, 3); }
+function tramo(t, ini, dur){ return lim((t - ini) / dur); }
+/* rebote corto al final, para que los circulos no lleguen planos */
+function golpe(u){ var c = 1.70158 + 1; return 1 + c*Math.pow(u-1,3) + 1.70158*Math.pow(u-1,2); }
 
-/* puntos del gecko, en unidades -0.5..0.5 */
+/* ---------- el gecko, ya tenido de verde ---------- */
+var cacheTinte = {};
+function geckoVerde(lado){
+  var k = Math.max(2, Math.round(lado));
+  if(cacheTinte[k]) return cacheTinte[k];
+  var c = document.createElement('canvas'); c.width = c.height = k;
+  var x = c.getContext('2d');
+  x.drawImage(imgGk, 0, 0, k, k);
+  x.globalCompositeOperation = 'source-in';
+  x.fillStyle = VERDE; x.fillRect(0, 0, k, k);
+  cacheTinte[k] = c;
+  return c;
+}
+
+/* ---------- puntos del gecko, en unidades -0.5..0.5 ---------- */
+var cacheGk = null;
 function puntosGecko(){
   if(cacheGk) return cacheGk;
   var L = 300, c = document.createElement('canvas'); c.width = c.height = L;
-  var x = c.getContext('2d', {willReadFrequently:true});
+  var x = c.getContext('2d');
   x.drawImage(imgGk, 0, 0, L, L);
   var d = x.getImageData(0, 0, L, L).data, p = [];
-  for(var j = 0; j < L; j += 2) for(var i = 0; i < L; i += 2)
-    if(d[(j*L + i)*4 + 3] > 130) p.push([i/L - .5, j/L - .5]);
-  cacheGk = p; return p;
+  for(var y = 0; y < L; y += 2){
+    for(var i = 0; i < L; i += 2){
+      if(d[(y*L + i)*4 + 3] > 128) p.push([i/L - .5, y/L - .5]);
+    }
+  }
+  cacheGk = p;
+  return p;
 }
 
-/* puntos del texto, en unidades de ALTURA de fuente (x hacia los lados, y arriba/abajo) */
-function puntosTexto(){
-  if(cacheTexto) return cacheTexto;
-  var txt = 'GECKO ' + MARCA, F = 60, pad = 14;
-  var med = document.createElement('canvas').getContext('2d');
-  med.font = '700 ' + F + 'px Mont, sans-serif';
-  med.letterSpacing = '7px';
-  var w = Math.ceil(med.measureText(txt).width) + pad*2, h = F + pad*2;
-  var c = document.createElement('canvas'); c.width = w; c.height = h;
-  var x = c.getContext('2d', {willReadFrequently:true});
+/* ---------- puntos de un texto, en unidades de alto de letra ---------- */
+var cacheTx = {};
+function puntosTexto(txt){
+  if(cacheTx[txt]) return cacheTx[txt];
+  var F = 54, c = document.createElement('canvas');
+  var x = c.getContext('2d');
   x.font = '700 ' + F + 'px Mont, sans-serif';
-  x.letterSpacing = '7px';
+  x.letterSpacing = Math.round(F*0.17) + 'px';
+  var an = Math.ceil(x.measureText(txt).width) + F;
+  c.width = an; c.height = F*2;
+  x = c.getContext('2d');
+  x.font = '700 ' + F + 'px Mont, sans-serif';
+  x.letterSpacing = Math.round(F*0.17) + 'px';
   x.textBaseline = 'middle'; x.fillStyle = '#fff';
-  x.fillText(txt, pad, h/2);
-  var d = x.getImageData(0, 0, w, h).data, p = [], min = 1e9, max = -1e9;
-  for(var j = 0; j < h; j += 2) for(var i = 0; i < w; i += 2)
-    if(d[(j*w + i)*4 + 3] > 130){
-      p.push([i/F, (j - h/2)/F]);
-      if(i < min) min = i; if(i > max) max = i;
+  x.fillText(txt, F/2, F);
+  var d = x.getImageData(0, 0, c.width, c.height).data, p = [], min = 1e9, max = -1e9;
+  for(var y = 0; y < c.height; y += 2){
+    for(var i = 0; i < c.width; i += 2){
+      if(d[(y*c.width + i)*4 + 3] > 128){
+        p.push([i/F, (y - F)/F]);
+        if(i < min) min = i;
+        if(i > max) max = i;
+      }
     }
-  // se centra por la TINTA, no por la caja: el espaciado entre letras deja aire
-  // de más al final y si no, el nombre queda chueco sobre la curva.
+  }
+  /* se centra por la TINTA, no por la caja: measureText se come el espaciado final */
   var medio = (min + max)/2/F;
   for(var k = 0; k < p.length; k++) p[k][0] -= medio;
-  cacheTexto = {p:p, ancho:(max - min)/F}; return cacheTexto;
+  cacheTx[txt] = {p:p, ancho:(max - min)/F};
+  return cacheTx[txt];
 }
 
-/* tiempos, en ms */
-var T = {gkIni:0, gkDur:1150, gkEsc:620,      // enjambre del gecko
-         a1:1450, a1Dur:850,                  // anillo interior
-         a2:1950, a2Dur:950,                  // anillo exterior
-         txIni:2350, txDur:1100, txEsc:650,   // letras
-         fin:4400};
+/* ===================================================================
+   A · GECKO APPS — destello, dos circulos, y las letras girando
+   =================================================================== */
+var TA = {desIni:0, desDur:620, expIni:620, expDur:420,
+          entIni:120, entDur:640,          // las palabras llegan de los lados
+          curIni:760, curDur:1000,         // giran en sentido del reloj y se curvan
+          aroIni:660, aroDur:820,          // los dos circulos salen del destello
+          gkIni:1500, gkDur:560,
+          fin:2600};
 
-/* tFijo (ms) = pinta un solo cuadro en ese instante y no arranca el bucle. */
+function cinetica(esc, tFijo){
+  var cv = esc.querySelector('canvas'), ctx = cv.getContext('2d');
+  if(esc._raf) cancelAnimationFrame(esc._raf);
+  if(!imgGk.complete){ imgGk.addEventListener('load', function(){ cinetica(esc, tFijo); }, {once:true}); return; }
+
+  var dpr = Math.min(devicePixelRatio || 1, 2);
+  var W = cv.clientWidth, H = cv.clientHeight;
+  if(!W || !H) return;
+  cv.width = W*dpr; cv.height = H*dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  /* mismas proporciones que emblema.ps1, sobre un emblema del 80% del alto */
+  var S = Math.min(W, H), E = S*0.80, cx = W/2, cy = H/2;
+  var rExt = E*0.4805, rInt = E*0.3750, rTxt = E*0.4300, rAro = E*0.3145;
+  var grLin = Math.max(1, E*0.0075), grAro = E*0.0225;
+  var grBanda = rExt - rInt, rMed = (rExt + rInt)/2;
+  var fuente = E*0.0720, track = E*0.0120, ladoGk = E*0.50;
+
+  ctx.font = '700 ' + fuente + 'px Mont, sans-serif';
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+
+  /* coloca una palabra sobre el arco, igual que el emblema */
+  function enArco(txt, abajo){
+    var ws = [], total = 0;
+    for(var i = 0; i < txt.length; i++){
+      var w = ctx.measureText(txt[i]).width;
+      ws.push(w); total += w + track;
+    }
+    total -= track;
+    var barrido = total/rTxt;
+    var centro = abajo ? Math.PI/2 : -Math.PI/2;
+    var dir = abajo ? -1 : 1;
+    var ang = centro - dir*barrido/2;
+    var fin = [], corre = -total/2;
+    for(var k = 0; k < txt.length; k++){
+      var paso = (ws[k] + track)/rTxt;
+      var a = ang + dir*paso/2;
+      fin.push({ch:txt[k], a:a, rot:a + (abajo ? -Math.PI/2 : Math.PI/2),
+                dx:corre + ws[k]/2});       // posicion dentro de la palabra recta
+      corre += ws[k] + track;
+      ang += dir*paso;
+    }
+    return fin;
+  }
+
+  /* De recto a curvo: la palabra arranca HORIZONTAL en el punto del circulo que
+     esta 90 grados antes (GECKO a la izquierda, APPS a la derecha) y gira en
+     sentido del reloj hasta su sitio. Se interpola en polares, por eso el
+     camino sale curvo y no una linea recta. */
+  function preparar(txt, abajo){
+    var L = enArco(txt, abajo);
+    var centroIni = abajo ? 0 : Math.PI;          // derecha / izquierda
+    var ox = cx + rTxt*Math.cos(centroIni), oy = cy + rTxt*Math.sin(centroIni);
+    for(var i = 0; i < L.length; i++){
+      var x0 = ox + L[i].dx, y0 = oy;
+      L[i].r0 = Math.hypot(x0 - cx, y0 - cy);
+      L[i].a0 = Math.atan2(y0 - cy, x0 - cx);
+      var a1 = L[i].a;
+      while(a1 < L[i].a0) a1 += Math.PI*2;        // siempre hacia el reloj
+      L[i].a1 = a1;
+    }
+    return L;
+  }
+
+  var arriba = preparar('GECKO', false);
+  var abajo  = preparar('APPS',  true);
+
+  function pintarPalabra(L, t, calar){
+    var uE = salida(tramo(t, TA.entIni, TA.entDur));
+    var uC = salida(tramo(t, TA.curIni, TA.curDur));
+    if(uE <= 0) return;
+    var ko = calar ? lim((uC - .84)/.16) : 0;
+    /* Mientras vuelan van en verde claro: si fueran del verde de la banda,
+       APPS desapareceria justo al cruzarla. Al asentarse, GECKO vira al verde
+       del emblema y APPS se convierte en el calado. */
+    var m = lim((uC - .55)/.45);
+    var col = 'rgb(' + Math.round(168 + (53 - 168)*m) + ',' +
+                       Math.round(255 + (208 - 255)*m) + ',' +
+                       Math.round(211 + (127 - 211)*m) + ')';
+    for(var pasada = 0; pasada < (calar ? 2 : 1); pasada++){
+      ctx.save();
+      if(pasada === 1){ ctx.globalCompositeOperation = 'destination-out'; ctx.globalAlpha = ko; }
+      else { ctx.globalAlpha = uE * (calar ? 1 - ko : 1); ctx.fillStyle = calar ? CLARO : col; }
+      for(var i = 0; i < L.length; i++){
+        var g = L[i];
+        var a = g.a0 + (g.a1 - g.a0)*uC;
+        /* en la entrada viene volando desde fuera, por el mismo radio */
+        var r = g.r0 + (rTxt - g.r0)*uC;
+        r *= 1 + (1 - uE)*0.95;
+        ctx.save();
+        ctx.translate(cx + r*Math.cos(a), cy + r*Math.sin(a));
+        ctx.rotate(g.rot*uC);
+        ctx.fillText(g.ch, 0, 0);
+        ctx.restore();
+      }
+      ctx.restore();
+    }
+  }
+
+  function pintar(t){
+    ctx.clearRect(0, 0, W, H);
+
+    /* --- destello: crece, y al llegar las letras estalla --- */
+    var uD = salida(tramo(t, TA.desIni, TA.desDur));
+    var uX = tramo(t, TA.expIni, TA.expDur);
+    if(uD > 0){
+      var rD = E*0.085*uD + E*0.40*salida(uX);
+      var op = uX < 1 ? (1 - uX)*(1 - uX)*(0.22 + 0.55*uD) : 0;
+      if(op > 0.004){
+        var g = ctx.createRadialGradient(cx, cy, 0, cx, cy, rD);
+        g.addColorStop(0, 'rgba(180,255,220,' + (op*0.95) + ')');
+        g.addColorStop(.42, 'rgba(53,208,127,' + (op*0.55) + ')');
+        g.addColorStop(1, 'rgba(53,208,127,0)');
+        ctx.fillStyle = g;
+        ctx.beginPath(); ctx.arc(cx, cy, rD, 0, Math.PI*2); ctx.fill();
+      }
+    }
+
+    /* --- los dos circulos y la banda de abajo (el reparto clasico) --- */
+    var uA = tramo(t, TA.aroIni, TA.aroDur);
+    if(uA > 0){
+      var k = golpe(uA);
+      ctx.save();
+      ctx.globalAlpha = Math.min(1, uA*3);
+      ctx.translate(cx, cy); ctx.scale(k, k); ctx.translate(-cx, -cy);
+      ctx.strokeStyle = VERDE; ctx.lineCap = 'butt';
+      ctx.lineWidth = grBanda;                       // banda rellena, mitad de abajo
+      ctx.beginPath(); ctx.arc(cx, cy, rMed, 0, Math.PI); ctx.stroke();
+      ctx.lineWidth = grLin;                         // los dos circulos finos
+      ctx.beginPath(); ctx.arc(cx, cy, rExt - grLin/2, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx, cy, rInt + grLin/2, 0, Math.PI*2); ctx.stroke();
+      ctx.lineWidth = grAro;                         // el aro de dentro
+      ctx.beginPath(); ctx.arc(cx, cy, rAro, 0, Math.PI*2); ctx.stroke();
+      ctx.restore();
+    }
+
+    /* --- el gecko --- */
+    var uG = tramo(t, TA.gkIni, TA.gkDur);
+    if(uG > 0){
+      var e = golpe(uG), lado = ladoGk*e;
+      ctx.save();
+      ctx.globalAlpha = Math.min(1, uG*2.4);
+      ctx.drawImage(geckoVerde(ladoGk*2), cx - lado/2, cy - lado/2, lado, lado);
+      ctx.restore();
+    }
+
+    /* --- las palabras --- */
+    pintarPalabra(arriba, t, false);
+    pintarPalabra(abajo,  t, true);
+  }
+
+  if(tFijo != null){ pintar(tFijo); return; }
+  var t0 = performance.now();
+  function paso(now){
+    var t = now - t0;
+    pintar(t);
+    if(t < TA.fin) esc._raf = requestAnimationFrame(paso);
+  }
+  esc._raf = requestAnimationFrame(paso);
+}
+
+/* ===================================================================
+   B · GECKO GAMES — enjambre, sin circulos, dos palabras curvadas
+   =================================================================== */
+var TB = {gkIni:0, gkDur:1150, gkEsc:620,
+          t1:1450, t1Dur:1000, t1Esc:620,     // GECKO arriba
+          t2:1800, t2Dur:1000, t2Esc:620,     // GAMES abajo
+          fin:4000};
+
 function enjambre(esc, tFijo){
   var cv = esc.querySelector('canvas'), ctx = cv.getContext('2d');
   if(esc._raf) cancelAnimationFrame(esc._raf);
@@ -269,39 +370,45 @@ function enjambre(esc, tFijo){
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
   var S = Math.min(W, H), cx = W/2, cy = H/2;
-  var ladoGk = S*0.355, rIn = S*0.245, rTx = S*0.325, rOut = S*0.405;
+  var ladoGk = S*0.42, rTx = S*0.40;
   var fuera = Math.max(W, H)*0.85;
-  var tx = puntosTexto(), LS = S*0.052;              // alto de letra
-  // si el nombre no cabe en el arco, se encoge
-  var barrido = (tx.ancho*LS)/rTx;
-  if(barrido > 2.1){ LS *= 2.1/barrido; barrido = 2.1; }
+  var tam = Math.max(1, S/400);
 
   function volando(destX, destY, retraso){
     var a = rnd()*Math.PI*2, d = fuera*(.55 + rnd()*.7);
     return {tx:destX, ty:destY, sx:cx + Math.cos(a)*d, sy:cy + Math.sin(a)*d,
-            r:retraso, g:(1 + rnd()*.7) * Math.max(1, S/400)};
+            r:retraso, g:(1 + rnd()*.7)*tam};
   }
 
-  // gecko: el retraso va por altura, se arma de arriba hacia abajo
+  /* el gecko se arma de arriba hacia abajo */
   var ps = puntosGecko().map(function(b){
     return volando(cx + b[0]*ladoGk, cy + b[1]*ladoGk,
-                   T.gkIni + (b[1] + .5)*T.gkEsc + rnd()*140);
+                   TB.gkIni + (b[1] + .5)*TB.gkEsc + rnd()*140);
   });
 
-  // letras: sobre el arco de arriba, igual que el emblema
-  var pt = tx.p.map(function(b){
-    var ang = -Math.PI/2 + (b[0]*LS)/rTx;
-    var rad = rTx - b[1]*LS;
-    return volando(cx + rad*Math.cos(ang), cy + rad*Math.sin(ang),
-                   T.txIni + (b[0]/tx.ancho + .5)*T.txEsc + rnd()*120);
-  });
+  /* una palabra sobre un arco: arriba lee normal, abajo va volteada */
+  function palabra(txt, abajo, ini, esc2){
+    var tx = puntosTexto(txt), LS = S*0.070;
+    var barrido = (tx.ancho*LS)/rTx;
+    if(barrido > 2.0){ LS *= 2.0/barrido; }
+    return tx.p.map(function(b){
+      var ang, rad;
+      if(abajo){ ang = Math.PI/2 - (b[0]*LS)/rTx; rad = rTx + b[1]*LS; }
+      else     { ang = -Math.PI/2 + (b[0]*LS)/rTx; rad = rTx - b[1]*LS; }
+      var av = abajo ? (0.5 - b[0]/tx.ancho) : (b[0]/tx.ancho + 0.5);
+      return volando(cx + rad*Math.cos(ang), cy + rad*Math.sin(ang),
+                     ini + av*esc2 + rnd()*120);
+    });
+  }
+  var pArriba = palabra('GECKO', false, TB.t1, TB.t1Esc);
+  var pAbajo  = palabra('GAMES', true,  TB.t2, TB.t2Esc);
 
   function dibujar(lista, dur, ahora){
     for(var k = 0; k < lista.length; k++){
       var p = lista[k], u = (ahora - p.r)/dur;
       if(u <= 0) continue;
       if(u > 1) u = 1;
-      var e = 1 - Math.pow(1 - u, 3);
+      var e = salida(u);
       ctx.globalAlpha = Math.min(1, e*1.6);
       ctx.fillStyle = u < 1 ? CLARO : VERDE;
       ctx.fillRect(p.sx + (p.tx - p.sx)*e, p.sy + (p.ty - p.sy)*e, p.g, p.g);
@@ -309,70 +416,50 @@ function enjambre(esc, tFijo){
     ctx.globalAlpha = 1;
   }
 
-  function anillo(r, ini, dur, ahora, grosor){
-    var u = (ahora - ini)/dur;
-    if(u <= 0) return;
-    if(u > 1) u = 1;
-    var e = 1 - Math.pow(1 - u, 3);
-    ctx.save();
-    ctx.strokeStyle = VERDE; ctx.lineWidth = grosor; ctx.lineCap = 'round';
-    ctx.shadowColor = 'rgba(53,208,127,.6)'; ctx.shadowBlur = 14;
-    ctx.beginPath();
-    ctx.arc(cx, cy, r, -Math.PI/2, -Math.PI/2 + Math.PI*2*e);
-    ctx.stroke();
-    ctx.restore();
-  }
-
   function pintar(t){
     ctx.clearRect(0, 0, W, H);
-    dibujar(ps, T.gkDur, t);
-    anillo(rIn,  T.a1, T.a1Dur, t, 2.6);
-    anillo(rOut, T.a2, T.a2Dur, t, 1.6);
-    dibujar(pt, T.txDur, t);
+    dibujar(ps, TB.gkDur, t);
+    dibujar(pArriba, TB.t1Dur, t);
+    dibujar(pAbajo,  TB.t2Dur, t);
   }
 
-  if(tFijo != null){ pintar(tFijo); esc._listo = true; return; }
-
+  if(tFijo != null){ pintar(tFijo); return; }
   var t0 = performance.now();
   function paso(now){
     var t = now - t0;
     pintar(t);
-    if(t < T.fin) esc._raf = requestAnimationFrame(paso);
+    if(t < TB.fin) esc._raf = requestAnimationFrame(paso);
   }
   esc._raf = requestAnimationFrame(paso);
 }
 
-/* ===================== CAPTURA ===================== */
-/* ?captura=A|B&t=<ms>[&marca=GAMES] deja la escena sola, a pantalla completa y
-   congelada en ese milisegundo. Un Edge headless por cuadro; ffmpeg los junta. */
-var CAP = new URLSearchParams(location.search);
-
-function congelar(esc, t){
-  esc.classList.remove('go');
-  void esc.offsetWidth;
-  esc.classList.add('go');
-  if(esc.getAnimations){
-    esc.getAnimations({subtree:true}).forEach(function(a){
-      a.pause();
-      try { a.currentTime = t; } catch(e){}
-    });
-  }
-  if(esc.classList.contains('eB')) enjambre(esc, t);
-  else esc._listo = true;
+/* ===================== pagina ===================== */
+function correr(el, tFijo){
+  if(el.classList.contains('eA')) cinetica(el, tFijo);
+  else enjambre(el, tFijo);
 }
+
+function verAsi(btn, esVideo){
+  var pieza = btn.closest('.pieza'), marco = pieza.querySelector('.marco');
+  marco.classList.toggle('vid', esVideo);
+  pieza.querySelectorAll('.pie button').forEach(function(b, i){
+    if(i < 2) b.setAttribute('aria-pressed', (i === 1) === esVideo);
+  });
+  var v = marco.querySelector('video');
+  if(esVideo){ v.play().catch(function(){}); } else { v.pause(); }
+}
+
+/* ?captura=A|B&t=<ms>: una escena sola, a pantalla completa y congelada */
+var CAP = new URLSearchParams(location.search);
 
 document.fonts.load('700 60px Mont').then(function(){
   var cual = CAP.get('captura');
   if(cual){
-    if(CAP.get('marca') === 'GAMES'){
-      MARCA = 'GAMES';
-      document.querySelectorAll('.marca').forEach(function(e){ e.textContent = 'Games'; });
-    }
     var esc = document.querySelector(cual === 'A' ? '.eA' : '.eB');
     document.body.innerHTML = '';
     document.body.className = 'captura';
     document.body.appendChild(esc);
-    congelar(esc, parseFloat(CAP.get('t') || 0));
+    correr(esc, parseFloat(CAP.get('t') || 0));
     return;
   }
   var io = new IntersectionObserver(function(ent, obs){
